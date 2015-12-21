@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context antiJARLocking="true" path="/AssessingEmployees">
+    <Resource auth="SqlAdmin" 
+    driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" 
+    maxActive="8" 
+    maxIdle="4" 
+    name="SqlAdmin" 
+    username="LabMoviles_SQLLogin_1"
+    password="hukv1sx52a" 
+    removeAbandoned="true" 
+    type="javax.sql.DataSource" 
+    url="jdbc:sqlserver://AssessingEmployees.mssql.somee.com;databaseName=AssessingEmployees" />
+</Context>
