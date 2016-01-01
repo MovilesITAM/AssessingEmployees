@@ -8,9 +8,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
-<html>
-    <c:set var="CompanyID" value="7" scope="session"  />
-    <c:set var="SessionType" value="CompanyAdministrator" scope="session"  />
+<html>    
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Add Departments and Jobs</title>
@@ -22,7 +20,22 @@
         <br/>
         <button id="btnAddDepartment">Add Department</button>
         <hr/>
-        
+        Add Job:<br/>
+        Select one department:
+        <sql:query var="rsQuery" dataSource="SqlAdmin">
+            Select DepartmentID, Name from Department where CompanyID = ?
+            <sql:param value="${sessionScope.CompanyID}" />
+        </sql:query>
+        <select class="form-control" name="DepartmentSelect">
+            <option value="0">Choose Department</option>
+            <c:forEach var="result" items="${rsQuery.rows}">
+                <option value="<c:out value="${result.DepartmentID}" />"><c:out value="${result.Name}" /></option>
+            </c:forEach>
+        </select>    
+        Job Name: <input type="text" name="JobName"><br/>
+        Description: <textarea name="JobDescription" placeholder="Descripcion"></textarea>
+        <br/>
+        <button id="btnAddJob">Add Job </button>
         
     <script src="../Resources/js/jquery.js"></script>
     <script src="../Resources/js/Js-AddDepartmentJob.js"></script>    
