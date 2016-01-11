@@ -1,0 +1,354 @@
+#wrap {
+  min-height: 100%;
+  height: auto;
+  margin: 0 auto -60px;
+  padding: 0 0 60px;
+}
+
+.GeneralDiv{
+   height: 600px !important;
+   margin-left: 10px;
+   overflow:  scroll;
+}
+#manageDiv{
+    min-height: 460px;
+}
+
+#contenidoTablaPDF{
+   height: 410px !important;
+   width: 100% !important;
+   overflow:  scroll;
+}
+
+#tablaCalificacion{
+    table-layout: auto;
+    width: 100% !important;
+    
+
+}
+
+#contenidoTablaCalificacion{
+    height: 400px !important;
+    
+   margin-left: 16px;
+   margin-right: 15px;
+    overflow:  scroll;
+}
+#footer {
+  height: 100px;
+  background-color:   #8c1515;
+}
+
+#instruccion{
+	margin-right:25px;
+	margin-left:25px;      
+}
+
+#generacionPDF{
+        width: 100% !important;
+}
+
+#asistenciaIzquierdaMenor{
+    width: 30% !important;
+}
+
+#divTotal{
+    width: 100% !important;
+}
+
+#asistenciaDerechaMayor{
+    width: 70% !important;
+}
+
+#instruccion2{
+       
+	margin-right:25px;
+	margin-left:25px; 
+        margin-top: 15px;
+}
+
+#FondoProfesor{
+     height: 100%;
+    background-color: #f2f1eb;
+    
+}
+
+#btnSiguiente{
+        
+	margin-left: 87%;
+}
+
+#row-profesor{
+    margin-left: 27px !important;
+}
+.textMenu{
+    margin-right: 10px;
+}
+.carousel{
+    margin-top:10px;
+}
+#Completo{
+    width: 100% !important; 
+}
+
+.generalTitle{
+    background-color: #B20005;
+    height: 45px;
+}
+
+#Porcentajes{
+    width: 32% !important;
+    margin-top: 9px;
+ 
+    display: inline;
+    height: 100%;
+}
+
+#PorcentajesArea{
+    margin-top: 9px;
+    resize:  vertical;
+}
+
+#datetimepicker5{
+    width: 50%;
+    float: left;
+}
+.input5Right{
+    width: 60%;
+    float: right;
+}
+
+#datetimepickerizquierda{
+    width: 100% !important;
+    float: left;
+	color: blue;
+}
+
+#datetimepickerderecha{
+    width: 100%;
+    float: left;
+	color:blue;
+}
+
+#spinnerDerecha{
+    float:left;
+    width: 50%;
+    
+}
+
+#spinnerTercio1{
+    float:left;
+    width: 10%;
+    
+}
+
+#spinnerMedio1{
+    float:left;
+    alignment-adjust: central;
+    width: 30% !important;
+    
+}
+
+#fechaChico{
+    width: 245px !important;
+}
+
+#spinnerMedio1{
+    float:left;
+    width: 50%;
+    
+}
+
+#spinnerDerecha2{
+    float:left;
+    margin-left: 16px;
+    margin-right: 15px;
+    width: 29%;
+    
+}
+
+
+#serapador{
+    width: 67% !important;
+   
+    float:left;
+}
+
+#radioIzquierda{
+        margin-top: 5px !important;
+	width: 5% !important;
+	float:left !important;
+}
+
+#textoIzquierda{
+    
+	width: 94% !important;
+	float: left !important;
+}
+
+#contenedorProfesor{
+        width: 100% !important;
+        background-color: #f6f2f2;
+}
+
+.Unidad{
+    padding-top: 3px;
+    text-align:  center;
+    color: white;
+}
+
+.justificado{
+	text-align:justify;
+}
+
+.TitulosInformacion{
+    margin-left: 25px;
+    padding-top: 4px;
+    color:white;
+}
+
+.TapaNav{
+    width: 100%;
+    margin-right: 0px;
+    margin-left: 0px;
+    background-color: white;
+    height: 14px;
+    margin-top: 0px;
+    
+}
+
+.informacion{
+    padding-top: 15px;
+}
+
+.Titulos{
+    background-color: #B20005;
+    margin-top: -15px;
+    height: 35px;
+    margin-right: -14px;
+    margin-left: -13px;
+}
+
+.container {
+  width: auto;
+  max-width: 680px;
+  padding: 0 15px;
+}
+.container .credit {
+  margin: 20px 0;
+}
+
+.leftSide{
+    width: 75%;
+   
+}
+
+.rightSide{
+    width: 25%;
+    
+    overflow:hidden;
+   
+}
+
+.indexCuadrados{
+    width: 33%;
+}
+
+.page-header-profesor{
+   
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.espacioabajo{
+    padding-bottom: 20px;
+
+}
+.rank{
+    width:70px;
+}
+.container-profesor{
+    margin-top: -57px;
+    margin-left: 17px;
+    margin-right: 15px;
+    margin-bottom: 15px;
+}
+
+.contenedorGridPreguntas{
+    margin:0 auto 0 auto; 
+    width: 50% !important;
+    
+}
+
+h1.blanco{
+    color: #f7f7f7 !important;
+    padding-left: 25px;
+    padding-top: 5px;
+    font-size: 30px;
+}
+
+h3.posicion{
+    color: #f7f7f7 !important;  
+}
+
+p.negro{
+    color: #333333;
+}
+
+p.negro:hover{
+    color: #777777;  
+}
+
+.NavMenu{
+    background-color:  #f2f1eb; 
+    border-color: #f2f1eb;
+    height: 0px !important; 
+    margin-top: -25px !important; 
+    margin-bottom: 5px;    
+}
+
+.col-md-1{
+    border-style:solid;
+    border-color:#f2f1eb;
+}
+
+.fondo-color{ 
+  color: #fff;
+  opacity:0.9;
+  background-color: #CC1C14;
+
+}
+
+.espacioaladothumbnail{
+
+    margin-left: -14px;
+    margin-right: -14px;
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    border-bottom: 3px solid #777777;
+    padding-bottom: 20px;
+    height: 15px !important;                     
+}
+
+section{
+	float:left;
+}
+@media screen and (max-width:800px){
+	.derecha{
+		width:70%;
+	}
+	.columna3{
+		width:100%;
+	}
+}
+
+@media screen and (max-width:480px){
+	section{
+		width:100% !important;
+	}
+}
+
+
+
+

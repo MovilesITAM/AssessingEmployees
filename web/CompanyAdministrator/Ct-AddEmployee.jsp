@@ -30,19 +30,11 @@
     </c:forEach>
         
     <c:set var="JobID" value="${param.JobSelect}" />
-    <c:set var="NationalIDNumber" value="${param.NationalIDNumber}" />
-    <c:set var="BirthDate" value="${param.BirthDate}" />
-    <c:set var="Gender" value="${param.Gender}" />
-    <c:set var="HireDate" value="${param.HireDate}" />
     <c:catch var ="catchException">
         <sql:update dataSource="SqlAdmin">
-            spAddEmployee ?,?,?,?,?,?
+            spAddEmployee ?,?
             <sql:param value="${ContactID}" />
             <sql:param value="${JobID}" />
-            <sql:param value="${NationalIDNumber}" />
-            <sql:param value="${BirthDate}" />
-            <sql:param value="${Gender}" />
-            <sql:param value="${HireDate}" />
         </sql:update>
     </c:catch>
     <c:choose>

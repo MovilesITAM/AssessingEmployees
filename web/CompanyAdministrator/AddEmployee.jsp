@@ -28,7 +28,8 @@
             --%>
             Select one department:
             <sql:query var="rsQuery" dataSource="SqlAdmin">
-                Select DepartmentID, Name from Department
+                Select DepartmentID, Name from Department where CompanyID = ?
+                <sql:param value="${sessionScope.CompanyID}" />
             </sql:query>
             <select class="form-control" name="DepartmentSelect">
                 <option value="0">Choose Department</option>
@@ -40,14 +41,10 @@
             <select class="form-control" name="JobSelect">
                 <option value="0">Choose Job</option>
             </select>
-            National ID Number: <input type="text" name="NationalIDNumber"><br/>
-            Birth Date:<input type="text" name="BirthDate"><br/>
-            Gender: <input type="text" name="Gender"><br/>
-            Hire Date:<input type="text" name="HireDate"><br/>
             <input type="submit" value="Submit" />
         </form>
         
         <script src="../Resources/js/jquery.js"></script>
-        <script src="../Resources/js/Js-AddEmployee.js"></script>  
+        <script src="../Resources/js/Js-AddEmployee2.js"></script>   
     </body>
 </html>

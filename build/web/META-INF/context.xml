@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context antiJARLocking="true" path="/AssessingEmployees">
-    
     <Resource auth="SqlAdmin" 
     driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" 
     maxActive="8" 
@@ -10,5 +9,6 @@
     password="sqladmin" 
     removeAbandoned="true" 
     type="javax.sql.DataSource" 
-    url="jdbc:sqlserver://RICARDO-386;databaseName=AssessingEmployees" />
+    url="jdbc:sqlserver://RICARDO-386;databaseName=AssessingEmployees" />	
+    
 </Context>

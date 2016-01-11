@@ -13,7 +13,7 @@
     <c:set var="EmailAddress" value="${param.Email}" />   
     <se:encodeMD5 var="PasswordHash" password="${param.Password}"/>
     <sql:query var="rsQuery" dataSource="SqlAdmin">
-        select ContactID, FirstName, MiddleNAme, LastName, Phone from Contact
+        select ContactID, FirstName, MiddleName, LastName, Phone from Contact
 	where EmailAddress = ? and PasswordHash = ? 
         <sql:param value="${EmailAddress}" />
         <sql:param value="${PasswordHash}" />
@@ -29,23 +29,22 @@
     </c:forEach>
     <c:choose>
         <c:when test="${isValid > 0}">
+            
             <c:set var="CompanyID" value="-1" scope="session"/>
             <sql:query var="rsQuery" dataSource="SqlAdmin">
-                Select CompanyID from CompanyAdministrator where ContactID = ?
+                Select CompanyID,ManageRoles,ManageCompetences,ApplyAssessment,ManageTask from CompanyPermissions where ContactID = ?
                 <sql:param value="${sessionScope.ContactID}" />
             </sql:query>
+                
             <c:forEach var="result" items="${rsQuery.rows}">
                 <c:set var="CompanyID" value="${result.CompanyID}" scope="session" />
-            </c:forEach>
-            <c:choose>
-                <c:when test="${sessionScope.CompanyID > 0}"> 
-                    <c:set var="SessionType" value="CompanyAdministrator" scope="session"  />
-                    <c:redirect url="CompanyAdministrator/AddEmployee.jsp"/>
-                    
-                </c:when>
-                <c:otherwise>
-                </c:otherwise>
-            </c:choose>       
+                <c:set var="ManageRoles" value="${result.ManageRoles}" scope="session" />
+                <c:set var="ManageCompetences" value="${result.ManageCompetences}" scope="session" />
+                <c:set var="ApplyAssessment" value="${result.ApplyAssessment}" scope="session" />
+                <c:set var="ManageTask" value="${result.ManageTask}" scope="session" />
+                <c:set var="SessionType" value="CompanyAdministrator" scope="session"  />
+            </c:forEach> 
+            <c:redirect url="index.jsp"/>       
         </c:when>
         <c:otherwise>
             <c:set var="Message" value="Email and password don't match" />
