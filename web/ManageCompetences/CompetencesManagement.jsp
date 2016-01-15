@@ -119,11 +119,11 @@
 
                         <div class="caption">
                             <h4>Competence</h4>
-                            Competence Name:
+                            <b>Competence Name:</b>
                             <input type="text" class="form-control" placeholder="Name" name="CompetenceName" disabled="true" />
-                            Competence Description:
+                            <b>Competence Description:</b>
                             <textarea class="form-control"  rows="3" name="CompetenceDescription" placeholder="Description" disabled="true"></textarea>
-                            Rank:
+                            <b>Rank:</b>
                             <input type="text" class="form-control" placeholder="Rank" name="CompetenceRank" disabled="true" />
                             <br/>
                             Questions:

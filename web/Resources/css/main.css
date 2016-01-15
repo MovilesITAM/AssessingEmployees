@@ -334,6 +334,11 @@ p.negro:hover{
 section{
 	float:left;
 }
+.inputLeftText{
+    width:60%;
+    float:left;
+}
+
 @media screen and (max-width:800px){
 	.derecha{
 		width:70%;

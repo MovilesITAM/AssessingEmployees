@@ -61,7 +61,7 @@ $(document).ready(function(){
         $.ajax({
             dataType: 'json',
             type: "POST",
-            url: "Ct-SelectQuestion.jsp",
+            url: "../ManageCompetences/Ct-SelectQuestion.jsp",
             data: "CompetenceID=" + $CompetenceID,
             success: function(data){
                 $("#QuestionsTable").find('tbody').empty();

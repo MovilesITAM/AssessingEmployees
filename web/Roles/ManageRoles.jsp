@@ -113,11 +113,7 @@
                 
             </div>
 
-
-
         </section>
-
-
         <!-- Scripts -->
         <script src="../Resources/js/jquery.js"></script>
         <script src="../Resources/js/bootstrap.min.js"></script>

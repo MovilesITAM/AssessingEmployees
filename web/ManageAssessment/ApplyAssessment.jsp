@@ -1,16 +1,29 @@
 <%-- 
-    Document   : AddCompetences2
-    Created on : 03-ene-2016, 21:36:28
+    Document   : ApplyAssessment
+    Created on : 13-ene-2016, 21:28:34
     Author     : Ricardo
 --%>
 
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
-<c:if test="${ sessionScope.ManageCompetences ne 'true' }" >
+<c:if test="${pageContext.request.method == 'POST' }">
+    <c:redirect url="CreateAssessment.jsp"/>
+</c:if>
+<c:if test="${ sessionScope.ApplyAssessment ne 'true' }" >
     <c:redirect url="../index.jsp"/>
 </c:if>
+<sql:query var="rsQuery" dataSource="SqlAdmin">
+    spAddAssessment ?,?
+    <sql:param value="${param.EmployeeID}" />
+    <sql:param value="${sessionScope.ContactID}" />
+</sql:query>
+<c:forEach var="result" items="${rsQuery.rows}">
+    <c:set var="AssessmentID" value="${result.AssesmentID}"/>
+    <c:set var="StartDate" value="${result.StartDate}"/>
+</c:forEach>
 <html>
     <head>
         <title>Assessing Employees</title>
@@ -56,7 +69,7 @@
 
                             <c:if test="${ sessionScope.SessionType eq 'CompanyAdministrator' }" >
                                 <li><a href="../index.jsp"><span class="glyphicon glyphicon-home textMenu"></span>Home</a></li>
-                                <li><a href="CompetencesManagement.jsp"><span class="glyphicon glyphicon-list-alt textMenu"></span>Manage Competences</a></li>
+                                <li><a href="AddCompetence.jsp"><span class="glyphicon glyphicon-pencil textMenu"></span>Add Competences</a></li>
                                 </c:if>
                         </ul>
                     </div>
@@ -69,58 +82,64 @@
             <div class="row" id="row-profesor">           
                 <div class="container-profesor">
                     <div class="page-header-profesor generalTitle" >
-                        <h1 class="Unidad">Competences</h1>
+                        <h1 class="Unidad">Create Assessment</h1>
                     </div>
                 </div>
+                <sql:query var="rsQuery" dataSource="SqlAdmin">
+                    Select * from Competence as C
+                        inner join CompetenceJob as CJ on C.CompetenceID = CJ.CompetenceID
+                        where CJ.JobID = ? 
+                    <sql:param value="${param.JobID}" />
+                </sql:query>
                 <div class="col-md-6">
                     <div class="thumbnail GeneralDiv" >
                         <div class="caption" id="manageDiv">
-                            <h4>Add Competences</h4>
-                            <b>Competence Name:</b>
-                            <input type="text" class="form-control" placeholder="Name" name="CompetenceName" />
-                            <br/><b>Competence Description:</b>
-                            <br/>
-                            <textarea class="form-control"  rows="3" name="CompetenceDescription" placeholder="Description"></textarea>
-                            <br/>
-                            <input type="submit" id="AddCompetence" class="btn btn-success" value="Add Competence"/>
-                            <br/>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="thumbnail GeneralDiv" >
+                            <h4>Create Assessment</h4>
 
-                        <div class="caption">
-                            <h4>Add Questions</h4>
-                            <sql:query var="rsQuery" dataSource="SqlAdmin">
-                                Select CompetenceID, Name from Competence where CompanyID = ?
-                                <sql:param value="${sessionScope.CompanyID}" />
-                            </sql:query>
-                             Add question to Competence:
-                            <select class="form-control" name="CompetenceSelect">
-                                <option value="0">Choose Competence</option>
-                                <c:forEach var="result" items="${rsQuery.rows}">
-                                    <option value="<c:out value="${result.CompetenceID}" />"><c:out value="${result.Name}" /></option>
-                                </c:forEach>
-                            </select><br/>
-                            <b>Question:</b>
-                            <input type="text" class="form-control" placeholder="Name" name="Question" />    
-                            <b>Weight</b>
-                            <input type="text" class="form-control" placeholder="Name" name="Value" />    
-                            <br/><input type="submit" id="AddQuestion" class="btn btn-success" value="Add Question"/>
+                            <b>Employee Email:</b><br/>
+                            <input type="text" class="form-control" placeholder="Email" name="Email"/>
                             <br/>
+                            <b>Department:</b>
+                            <select class="form-control" name="DepartmentSelect">
+                                <option value="0">Choose Department</option>
+                                <c:forEach var="result" items="${rsQuery.rows}">
+                                    <option value="<c:out value="${result.DepartmentID}" />"><c:out value="${result.Name}" /></option>
+                                </c:forEach>
+                            </select>
+                            <b>Job:</b>
+                            <select class="form-control" name="JobSelect">
+                                <option value="0">Choose Job</option>
+                            </select>
+                            <br/>
+                            <b>Competences of the selected job:</b>
                             <div class="table-responsive">    
-                                <table class="table table-hover" id="QuestionsTable">
+                                <table class="table table-hover" id="CompetencesTable">
                                     <thead>
                                         <tr>
-                                            <th>Question</th>
-                                            <th>Weight</th>
+                                            <th>Name</th>
+                                            <th>Rank</th>
+                                            <th>Details</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     </tbody>
                                 </table>
-                            </div>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="thumbnail GeneralDiv">
+
+                        <div class="caption">
+                            <h4>Assessment</h4>
+
+                            <b>Name of the Employee: <i>
+                                    <c:out value="${param.FirstName}${' '}${param.LastName}"/></i></b> <br/>
+                            <b>Time when you started:<i><c:out value="${StartDate}"/></i>  </b><br/>
+                            
+                            <b>Rate the answer (number from 0 to 1):<b/>
+                            <input type="text" class="form-control" placeholder="Rank" name="AnswerRate"  />
                         </div>
                     </div>
                 </div>
@@ -145,7 +164,8 @@
         <!-- Scripts -->
         <script src="../Resources/js/jquery.js"></script>
         <script src="../Resources/js/bootstrap.min.js"></script>
-        <script src="../Resources/js/Js-AddCompetence.js"></script> 
+        <script src="../Resources/js/Js-CreateAssessment.js"></script>
+
 
     </body>
 </html>
