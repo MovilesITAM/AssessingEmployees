@@ -91,6 +91,7 @@
                     <div class="thumbnail GeneralDiv" >
                         <div class="caption" id="manageDiv">
                             <h4>Employee Statistics</h4>
+                            Please write the employee's email of which you want to see statistics
                             Email:
                             <input class="form-control" id='email1' type="email" employee="1" value="${param.Email}" />
                             Name: 

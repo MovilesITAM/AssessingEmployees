@@ -119,11 +119,11 @@
                                     <option value="<c:out value="${result.CompetenceID}" />"><c:out value="${result.Name}" /></option>
                                 </c:forEach>
                             </select>
-                            <b>Questions:</b>
+                            <%-- <b>Questions:</b>
                             <select class="form-control" name="QuestionsSelect">
                                 <option value="0">Choose Question</option>
                             </select>
-                            <br/>
+                            <br/>--%>
                             <b>Questions:</b>
                             <textarea readonly class="form-control"  id="QuestionText"rows="3" name="QuestionText" placeholder="Question"></textarea>
                             <br/>
@@ -144,6 +144,8 @@
                             <input type="number" min="0" max="10" class="form-control" id="Rate3" name="AnswerRate"/>
                             <b>Notes:</b>
                             <textarea class="form-control"  rows="3" name="Notes" placeholder="Notes"></textarea>
+                            <br/>
+                            <input type="submit" id="nextQuestion" class="btn btn-success" value="Next Question" />
                         </div>
                     </div>
                 </div>
@@ -164,7 +166,7 @@
                         <input type="text" name='Email' class="form-control" value="<c:out value="${param.Email}"/>" readonly />
                         <b>Time when you started: </b>
                         <input type="text" class="form-control" value="<c:out value="${StartDate}"/>" readonly /><br/>
-                        <input type="submit" id="saveAssessment" class="btn btn-success" value="Finish Assessment" />
+                        
                         </div>
                     </div>
                 </div>

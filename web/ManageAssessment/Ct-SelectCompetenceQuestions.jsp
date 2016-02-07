@@ -20,6 +20,7 @@
         <json:object>
             <json:property name="CompetenceID" value="${row2.CompetenceID}"  />
             <json:property name="Name" value="${row2.Name}"  />
+            <json:property name="ActualQuestion" value="0"  />
             
             <sql:query var="rsQuery" dataSource="SqlAdmin">
                 Select QuestionID, Question, Value from Question where CompetenceID = ? and Deleted = 0 ORDER BY NEWID()

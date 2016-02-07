@@ -23,9 +23,10 @@
 					inner join Employee on Assessment.EmployeeID = Employee.EmployeeID
 					inner join Contact on Employee.ContactID = Contact.ContactID
 					where Contact.EmailAddress = ?
+					and Assessment.EndDate is not Null
 					order by Assessment.StartDate desc
 			)
-                and A.EndDate is not NULL
+               
 	group by Q.CompetenceID, A.AssessmentID, C.Name, A.StartDate, CO.LastName, CO.FirstName
 	order by A.StartDate desc
         <sql:param value="${param.Email}" />
