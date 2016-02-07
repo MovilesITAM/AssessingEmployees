@@ -9,6 +9,6 @@
     password="sqladmin" 
     removeAbandoned="true" 
     type="javax.sql.DataSource" 
-    url="jdbc:sqlserver://RICARDO-386;databaseName=AssessingEmployees" />	
+    url="jdbc:sqlserver://RICARDO-386;databaseName=AssessingEmployees" />		
     
 </Context>

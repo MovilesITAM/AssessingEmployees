@@ -53,10 +53,26 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav ">
 
-                            <c:if test="${ sessionScope.SessionType eq 'CompanyAdministrator' }" >
-                                <li><a href="../index.jsp"><span class="glyphicon glyphicon-home textMenu"></span>Home</a></li>
-                                <li><a href="AddCompetence.jsp"><span class="glyphicon glyphicon-pencil textMenu"></span>Add Competences</a></li>
-                                </c:if>
+                            <c:if test="${ sessionScope.ManageCompetences eq 'true' }" >
+                                <li><a href="../ManageCompetences/CompetencesManagement.jsp">
+                                    <span class="glyphicon glyphicon-list-alt textMenu"></span>
+                                        Manage Competences and Jobs
+                                </a></li>
+                                <li><a href="../ManageCompetences/AddCompetence.jsp">
+                                    <span class="glyphicon glyphicon-pencil textMenu"></span>
+                                    Add Competences and Questions
+                                </a></li>
+                            </c:if>
+                            <c:if test="${ sessionScope.ApplyAssessment eq 'true' }" >
+                                <li><a href="../ManageAssessment/CreateAssessment.jsp">
+                                    <span class="glyphicon glyphicon-file textMenu"></span>
+                                        Create Assessment
+                                </a></li>
+                                <li><a href="../ManageAssessment/EmployeeStatistics.jsp">
+                                    <span class="glyphicon glyphicon-signal textMenu"></span>
+                                    View Statistics
+                                </a></li>
+                            </c:if>
                         </ul>
                     </div>
                 </div>
@@ -64,11 +80,11 @@
         </nav>
 
         <!-- Cuerpo -->    
-        <section class="leftSide">
+        <section class="centralSide">
             <div class="row" id="row-profesor">           
                 <div class="container-profesor">
                     <div class="page-header-profesor generalTitle" >
-                        <h1 class="Unidad">Competences Management</h1>
+                        <h1 class="Unidad">Manage Competences and Jobs</h1>
                     </div>
                 </div>
                 <sql:query var="rsQuery" dataSource="SqlAdmin">
@@ -78,7 +94,7 @@
                 <div class="col-md-6">
                     <div class="thumbnail GeneralDiv" >
                         <div class="caption" id="manageDiv">
-                            <h4>Manage Competences</h4>
+                            <h4>Manage Competences and Jobs</h4>
                             <b>Department:</b>
                             <select class="form-control" name="DepartmentSelect">
                                 <option value="0">Choose Department</option>
@@ -147,18 +163,6 @@
 
 
 
-        </section>
-
-        <section class="rightSide">
-            <div id = "instruccion2">
-                <div class="thumbnail" id="FondoProfesor">
-                    <img src="../Resources/img/banner_profesorVI.jpg" data-src="holder.js/300x200" alt="...">
-                    <div class="caption">
-                        <div class="Titulos"><h3 class="TitulosInformacion"><i>Lorem ipsum ad his</i></h3></div>
-                        <p class="informacion"> Lorem ipsum ad his</p>
-                    </div>
-                </div>
-            </div>
         </section>
 
         <!-- Scripts -->

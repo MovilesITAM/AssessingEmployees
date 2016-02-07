@@ -11,7 +11,7 @@
 
 <c:if test="${pageContext.request.method == 'POST' }">
     <sql:query var="rsQuery" dataSource="SqlAdmin">
-        Select QuestionID, Question, Value from Question where CompetenceID = ?
+        Select QuestionID, Question, Value, Deleted from Question where CompetenceID = ?
         <sql:param value="${param.CompetenceID}" />
     </sql:query>
     <json:array name="Questions" var="row" items="${rsQuery.rows}">
@@ -19,6 +19,7 @@
             <json:property name="QuestionID" value="${row.QuestionID}"  />
             <json:property name="Question" value="${row.Question}"  />
             <json:property name="Value" value="${row.Value}"  />
+            <json:property name="Deleted" value="${row.Deleted}"  />
         </json:object>
     </json:array>
 </c:if>

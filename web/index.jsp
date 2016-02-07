@@ -20,8 +20,8 @@
                     <div class="navbar-header">
                         <h1 class="blanco">Assessing Employees</h1>
                     </div>
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <form class="navbar-form navbar-right" role="search" method="POST" action="Ct-Login.jsp">
+                    <div class="navbar-collapse navbar-fixed-top" id="bs-example-navbar-collapse-1">
+                        <form class="navbar-form navbar-right " role="search" method="POST" action="Ct-Login.jsp">
                             <div class="form-group ">
                                 <input type="text" class="form-control input-sm"  name="Email" placeholder="Email">
                             </div>
@@ -37,7 +37,7 @@
         </c:if>
 
         <c:if test="${not empty sessionScope.SessionType}" >
-            <nav class="navbar navbar-default" role="navigation">
+            <nav class="navbar navbar-default" id='generalHeader' role="navigation">
                 <div class="container-fluid">
                     <div class="navbar-header">
                         <c:if test="${sessionScope.SessionType eq 'CompanyAdministrator'}" >
@@ -70,16 +70,26 @@
         <nav class="navbar navbar-default NavMenu" >
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <div class="navbar-fixed-top navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav ">
                             <c:if test="${ sessionScope.ManageCompetences eq 'true' }" >
                                 <li><a href="ManageCompetences/CompetencesManagement.jsp">
                                     <span class="glyphicon glyphicon-list-alt textMenu"></span>
-                                        Manage Competences
+                                        Manage Competences and Jobs
                                 </a></li>
                                 <li><a href="ManageCompetences/AddCompetence.jsp">
                                     <span class="glyphicon glyphicon-pencil textMenu"></span>
                                     Add Competences and Questions
+                                </a></li>
+                            </c:if>
+                            <c:if test="${ sessionScope.ApplyAssessment eq 'true' }" >
+                                <li><a href="ManageAssessment/CreateAssessment.jsp">
+                                    <span class="glyphicon glyphicon-file textMenu"></span>
+                                        Create Assessment
+                                </a></li>
+                                <li><a href="ManageAssessment/EmployeeStatistics.jsp">
+                                    <span class="glyphicon glyphicon-signal textMenu"></span>
+                                    View Statistics
                                 </a></li>
                             </c:if>
                         </ul>

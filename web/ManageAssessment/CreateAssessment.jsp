@@ -53,10 +53,26 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav ">
 
-                            <c:if test="${ sessionScope.SessionType eq 'CompanyAdministrator' }" >
-                                <li><a href="../index.jsp"><span class="glyphicon glyphicon-home textMenu"></span>Home</a></li>
-                                <li><a href="AddCompetence.jsp"><span class="glyphicon glyphicon-pencil textMenu"></span>Add Competences</a></li>
-                                </c:if>
+                            <c:if test="${ sessionScope.ManageCompetences eq 'true' }" >
+                                <li><a href="../ManageCompetences/CompetencesManagement.jsp">
+                                    <span class="glyphicon glyphicon-list-alt textMenu"></span>
+                                        Manage Competences and Jobs
+                                </a></li>
+                                <li><a href="../ManageCompetences/AddCompetence.jsp">
+                                    <span class="glyphicon glyphicon-pencil textMenu"></span>
+                                    Add Competences and Questions
+                                </a></li>
+                            </c:if>
+                            <c:if test="${ sessionScope.ApplyAssessment eq 'true' }" >
+                                <li><a href="../ManageAssessment/CreateAssessment.jsp">
+                                    <span class="glyphicon glyphicon-file textMenu"></span>
+                                        Create Assessment
+                                </a></li>
+                                <li><a href="../ManageAssessment/EmployeeStatistics.jsp">
+                                    <span class="glyphicon glyphicon-signal textMenu"></span>
+                                    View Statistics
+                                </a></li>
+                            </c:if>
                         </ul>
                     </div>
                 </div>
@@ -64,7 +80,7 @@
         </nav>
 
         <!-- Cuerpo -->    
-        <section class="leftSide">
+        <section class="centralSide">
             <div class="row" id="row-profesor">           
                 <div class="container-profesor">
                     <div class="page-header-profesor generalTitle" >
@@ -79,44 +95,29 @@
                     <div class="thumbnail GeneralDiv" >
                         <div class="caption" id="manageDiv">
                             <h4>Create Assessment</h4>
+                            <form id="formAssessment" action="ApplyAssessment.jsp" method="POST">
                             
-                            <b>Employee Email:</b><br/>
+                            <b>Employee's Email:</b><br/>
                             <input type="text" class="form-control" placeholder="Email" name="Email"/>
                             <br/>
-                            <b>Department:</b>
-                            <select class="form-control" name="DepartmentSelect">
-                                <option value="0">Choose Department</option>
-                                <c:forEach var="result" items="${rsQuery.rows}">
-                                    <option value="<c:out value="${result.DepartmentID}" />"><c:out value="${result.Name}" /></option>
-                                </c:forEach>
-                            </select>
-                            <b>Job:</b>
-                            <select class="form-control" name="JobSelect">
-                                <option value="0">Choose Job</option>
-                            </select>
+                            <b>Name of the Employee:</b><br/>
+                            <input type="text" class="form-control" placeholder="Name of the Employee" name="EmployeeName" readonly/>
+                            <input type="hidden" class="form-control" name="EmployeeID" readonly />
+                            <input type="hidden" class="form-control" name="JobID" readonly/>
                             <br/>
-                            <b>Competences of the selected job:</b>
-                            <div class="table-responsive">    
-                                <table class="table table-hover" id="CompetencesTable">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Rank</th>
-                                            <th>Details</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
-                            </div> 
-                            
-                            <input type="submit" name="AddButton" class="btn btn-success" value="Add Competence"/>
+                            <b>Phone of the Employee:</b><br/>
+                            <input type="text" class="form-control" placeholder="Phone of the Employee" name="EmployeePhone" readonly/>
+                            <br/>
+                            <b>Job of the Employee:</b><br/>
+                            <input type="text" class="form-control" placeholder="Job of the Employee" name="JobName" readonly/>
+                            <br/>
+                            <input type="submit" id="createAssessment" class="btn btn-success" value="Create Assessment" />
                             <br/><br/>
                             <div class="alert alert-danger" id="message">
                                 <ul id="errorList">
-                                    <li>Email does not exist</li>
                                 </ul>
                              </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -125,9 +126,10 @@
 
                         <div class="caption">
                             <h4>Competence</h4>
-                            
-                            <b>Competence Name:</b>
-                            <input type="text" class="form-control" placeholder="Name" name="CompetenceName" disabled="true" />
+                            <b>Competences of the job:</b>
+                            <select class="form-control" name="CompetencesJob">
+                                <option value="-1">Choose Competence</option>
+                            </select>
                             <b> Competence Description:</b>
                             <textarea class="form-control"  rows="3" name="CompetenceDescription" placeholder="Description" disabled="true"></textarea>
                             <b>Rank:</b>
@@ -147,21 +149,6 @@
                                 </table>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-
-
-
-        </section>
-
-        <section class="rightSide">
-            <div id = "instruccion2">
-                <div class="thumbnail" id="FondoProfesor">
-                    <img src="../Resources/img/banner_profesorVI.jpg" data-src="holder.js/300x200" alt="...">
-                    <div class="caption">
-                        <div class="Titulos"><h3 class="TitulosInformacion"><i>Lorem ipsum ad his</i></h3></div>
-                        <p class="informacion"> Lorem ipsum ad his</p>
                     </div>
                 </div>
             </div>

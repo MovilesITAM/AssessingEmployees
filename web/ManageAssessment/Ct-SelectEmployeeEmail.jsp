@@ -11,14 +11,17 @@
 
 <c:if test="${pageContext.request.method == 'POST' }">
     <sql:query var="rsQuery" dataSource="SqlAdmin">
-        Select E.EmployeeID, E.ContactID,C.FirstName, C.MiddleName, C.LastName, C.EmailAddress, C.Phone  from Employee as E
+        Select E.EmployeeID,J.Name, J.JobID ,E.ContactID,C.FirstName, C.MiddleName, C.LastName, C.EmailAddress, C.Phone  from Employee as E
 	inner join Contact as C on E.ContactID = C.ContactID 
-	where EmailAddress = ?
+	inner join Job as J on E.JobID = J.JobID
+	where C.EmailAddress = ?
         <sql:param value="${param.Email}" />
     </sql:query>
     <json:array name="Questions" var="row" items="${rsQuery.rows}">
         <json:object>
             <json:property name="EmployeeID" value="${row.EmployeeID}"  />
+            <json:property name="JobName" value="${row.Name}"  />
+            <json:property name="JobID" value="${row.JobID}"  />
             <json:property name="ContactID" value="${row.ContactID}"  />
             <json:property name="FirstName" value="${row.FirstName}"  />
             <json:property name="MiddleName" value="${row.MiddleName}"  />

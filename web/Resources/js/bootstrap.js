@@ -1949,3 +1949,12 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap requires jQuery'
   })
 
 }(jQuery);
+$(document).ajaxStart(function ()
+{
+    $('body').addClass('wait');
+
+}).ajaxComplete(function () {
+
+    $('body').removeClass('wait');
+
+});

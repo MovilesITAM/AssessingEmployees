@@ -9,7 +9,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
-<c:if test="${pageContext.request.method == 'POST' }">
+<c:if test="${pageContext.request.method ne 'POST' }">
     <c:redirect url="CreateAssessment.jsp"/>
 </c:if>
 <c:if test="${ sessionScope.ApplyAssessment ne 'true' }" >
@@ -21,7 +21,7 @@
     <sql:param value="${sessionScope.ContactID}" />
 </sql:query>
 <c:forEach var="result" items="${rsQuery.rows}">
-    <c:set var="AssessmentID" value="${result.AssesmentID}"/>
+    <c:set var="AssessmentID" value="${result.AssessmentID}"/>
     <c:set var="StartDate" value="${result.StartDate}"/>
 </c:forEach>
 <html>
@@ -67,64 +67,83 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav ">
 
-                            <c:if test="${ sessionScope.SessionType eq 'CompanyAdministrator' }" >
-                                <li><a href="../index.jsp"><span class="glyphicon glyphicon-home textMenu"></span>Home</a></li>
-                                <li><a href="AddCompetence.jsp"><span class="glyphicon glyphicon-pencil textMenu"></span>Add Competences</a></li>
-                                </c:if>
+                            <c:if test="${ sessionScope.ManageCompetences eq 'true' }" >
+                                <li><a href="../ManageCompetences/CompetencesManagement.jsp">
+                                    <span class="glyphicon glyphicon-list-alt textMenu"></span>
+                                        Manage Competences and Jobs
+                                </a></li>
+                                <li><a href="../ManageCompetences/AddCompetence.jsp">
+                                    <span class="glyphicon glyphicon-pencil textMenu"></span>
+                                    Add Competences and Questions
+                                </a></li>
+                            </c:if>
+                            <c:if test="${ sessionScope.ApplyAssessment eq 'true' }" >
+                                <li><a href="../ManageAssessment/CreateAssessment.jsp">
+                                    <span class="glyphicon glyphicon-file textMenu"></span>
+                                        Create Assessment
+                                </a></li>
+                                <li><a href="../ManageAssessment/EmployeeStatistics.jsp">
+                                    <span class="glyphicon glyphicon-signal textMenu"></span>
+                                    View Statistics
+                                </a></li>
+                            </c:if>
                         </ul>
                     </div>
                 </div>
             </div>
         </nav>
 
-        <!-- Cuerpo -->    
-        <section class="leftSide">
+        <!-- Cuerpo -->   
+        <sql:query var="rsQuery" dataSource="SqlAdmin">
+            Select * from Competence as C
+            inner join CompetenceJob as CJ on C.CompetenceID = CJ.CompetenceID
+            where CJ.JobID = ? 
+            <sql:param value="${param.JobID}" />
+        </sql:query>
+        <section class="centralSide">
             <div class="row" id="row-profesor">           
                 <div class="container-profesor">
                     <div class="page-header-profesor generalTitle" >
-                        <h1 class="Unidad">Create Assessment</h1>
+                        <h1 class="Unidad">Apply Assessment</h1>
                     </div>
                 </div>
-                <sql:query var="rsQuery" dataSource="SqlAdmin">
-                    Select * from Competence as C
-                        inner join CompetenceJob as CJ on C.CompetenceID = CJ.CompetenceID
-                        where CJ.JobID = ? 
-                    <sql:param value="${param.JobID}" />
-                </sql:query>
                 <div class="col-md-6">
                     <div class="thumbnail GeneralDiv" >
                         <div class="caption" id="manageDiv">
-                            <h4>Create Assessment</h4>
+                            <h4>Assessment</h4>
 
-                            <b>Employee Email:</b><br/>
-                            <input type="text" class="form-control" placeholder="Email" name="Email"/>
-                            <br/>
-                            <b>Department:</b>
-                            <select class="form-control" name="DepartmentSelect">
-                                <option value="0">Choose Department</option>
+                            <b>Competences:</b>
+                            <select class="form-control" name="CompetenceSelect">
+                                <option value="0">Choose a competence</option>
                                 <c:forEach var="result" items="${rsQuery.rows}">
-                                    <option value="<c:out value="${result.DepartmentID}" />"><c:out value="${result.Name}" /></option>
+                                    <option value="<c:out value="${result.CompetenceID}" />"><c:out value="${result.Name}" /></option>
                                 </c:forEach>
                             </select>
-                            <b>Job:</b>
-                            <select class="form-control" name="JobSelect">
-                                <option value="0">Choose Job</option>
+                            <b>Questions:</b>
+                            <select class="form-control" name="QuestionsSelect">
+                                <option value="0">Choose Question</option>
                             </select>
                             <br/>
-                            <b>Competences of the selected job:</b>
-                            <div class="table-responsive">    
-                                <table class="table table-hover" id="CompetencesTable">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Rank</th>
-                                            <th>Details</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
-                            </div> 
+                            <b>Questions:</b>
+                            <textarea readonly class="form-control"  id="QuestionText"rows="3" name="QuestionText" placeholder="Question"></textarea>
+                            <br/>
+                            <table>
+                                <tr>
+                                    <td class='tdCheck' ><input type="checkbox"  name="Situation" value="Situation"/><b>&nbsp&nbsp&nbspSituation<b/></td>
+                                    <td class='tdCheck' ><input type="checkbox" name="Targets" value="Targets"/><b>&nbsp&nbsp&nbspTargets</b></td>
+                                    <td class='tdCheck'> <input type="checkbox" name="Actions" value="Actions"/><b>&nbsp&nbsp&nbspActions</b></td>
+                                    <td class='tdCheck'><input type="checkbox" name="Result" value="Result"/><b>&nbsp&nbsp&nbspResult</b></td>
+                                    
+                                </tr>
+                            </table>
+                            <br/>
+                            <b>Rate the answer(Probability Bounds):</b>
+                            <br/>
+                            <input type="number" min="0" max="10" class="form-control" id="Rate1" name="AnswerRate"/>
+                            <input type="number" min="0" max="10" class="form-control" id="Rate2" name="AnswerRate"/>
+                            <input type="number" min="0" max="10" class="form-control" id="Rate3" name="AnswerRate"/>
+                            <b>Notes:</b>
+                            <textarea class="form-control"  rows="3" name="Notes" placeholder="Notes"></textarea>
                         </div>
                     </div>
                 </div>
@@ -133,39 +152,31 @@
 
                         <div class="caption">
                             <h4>Assessment</h4>
-
-                            <b>Name of the Employee: <i>
-                                    <c:out value="${param.FirstName}${' '}${param.LastName}"/></i></b> <br/>
-                            <b>Time when you started:<i><c:out value="${StartDate}"/></i>  </b><br/>
-                            
-                            <b>Rate the answer (number from 0 to 1):<b/>
-                            <input type="text" class="form-control" placeholder="Rank" name="AnswerRate"  />
+                        <input type="hidden" value="<c:out value="${AssessmentID}"/>" name="AssessmentID" />
+                        <b>Name of the Job:</b>
+                        <input type="text" class="form-control" value="<c:out value="${param.JobName}"/>" readonly />
+                        <input type="hidden" name="JobID" class="form-control" value="<c:out value="${param.JobID}"/>" />
+                        <br/>
+                        <b>Name of the Employee:</b>
+                        <input type="text" class="form-control" value="<c:out value="${param.EmployeeName}"/>" readonly />
+                        <br/>
+                        Email of the Employee:
+                        <input type="text" name='Email' class="form-control" value="<c:out value="${param.Email}"/>" readonly />
+                        <b>Time when you started: </b>
+                        <input type="text" class="form-control" value="<c:out value="${StartDate}"/>" readonly /><br/>
+                        <input type="submit" id="saveAssessment" class="btn btn-success" value="Finish Assessment" />
                         </div>
                     </div>
                 </div>
             </div>
-
-
-
         </section>
 
-        <section class="rightSide">
-            <div id = "instruccion2">
-                <div class="thumbnail" id="FondoProfesor">
-                    <img src="../Resources/img/banner_profesorVI.jpg" data-src="holder.js/300x200" alt="...">
-                    <div class="caption">
-                        <div class="Titulos"><h3 class="TitulosInformacion"><i>Lorem ipsum ad his</i></h3></div>
-                        <p class="informacion"> Lorem ipsum ad his</p>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <!-- Scripts -->
-        <script src="../Resources/js/jquery.js"></script>
-        <script src="../Resources/js/bootstrap.min.js"></script>
-        <script src="../Resources/js/Js-CreateAssessment.js"></script>
+    <!-- Scripts -->
+    <script src="../Resources/js/jquery.js"></script>
+    <script src="../Resources/js/bootstrap.min.js"></script>
+    <script src="../Resources/js/Js-ApplyAssessment.js"></script>
 
 
-    </body>
+</body>
 </html>
