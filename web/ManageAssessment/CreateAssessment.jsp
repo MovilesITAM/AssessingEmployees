@@ -73,6 +73,12 @@
                                     View Statistics
                                 </a></li>
                             </c:if>
+                            <c:if test="${ sessionScope.ManageTask eq 'true' }" >
+                                <li><a href="../ManageTask/ManageTask.jsp">
+                                    <span class="glyphicon glyphicon-file textMenu"></span>
+                                        Manage Tasks
+                                </a></li>
+                            </c:if>    
                         </ul>
                     </div>
                 </div>
@@ -87,10 +93,6 @@
                         <h1 class="Unidad">Create Assessment</h1>
                     </div>
                 </div>
-                <sql:query var="rsQuery" dataSource="SqlAdmin">
-                    Select DepartmentID, Name from Department where CompanyID = ?
-                    <sql:param value="${sessionScope.CompanyID}" />
-                </sql:query>
                 <div class="col-md-6">
                     <div class="thumbnail GeneralDiv" >
                         <div class="caption" id="manageDiv">

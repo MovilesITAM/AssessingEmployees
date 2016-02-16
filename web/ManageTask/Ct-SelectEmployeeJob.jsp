@@ -1,8 +1,9 @@
 <%-- 
-    Document   : Ct-SelectEmployeeEmail
-    Created on : 12-ene-2016, 22:41:50
+    Document   : Ct-SelectEmployeeJob
+    Created on : 07-feb-2016, 18:21:13
     Author     : Ricardo
 --%>
+
 
 <%@page contentType="application/json" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -11,18 +12,14 @@
 
 <c:if test="${pageContext.request.method == 'POST' }">
     <sql:query var="rsQuery" dataSource="SqlAdmin">
-        Select E.EmployeeID,J.Name, J.JobID ,E.ContactID,C.FirstName, C.MiddleName, C.LastName, C.EmailAddress, C.Phone  from Employee as E
+        Select E.EmployeeID,C.FirstName, C.MiddleName, C.LastName, C.EmailAddress, C.Phone  from Employee as E
 	inner join Contact as C on E.ContactID = C.ContactID 
-	inner join Job as J on E.JobID = J.JobID
-	where C.EmailAddress = ?
-        <sql:param value="${param.Email}" />
+	where E.JobID = ?
+        <sql:param value="${param.JobID}" />
     </sql:query>
     <json:array name="Employees" var="row" items="${rsQuery.rows}">
         <json:object>
             <json:property name="EmployeeID" value="${row.EmployeeID}"  />
-            <json:property name="JobName" value="${row.Name}"  />
-            <json:property name="JobID" value="${row.JobID}"  />
-            <json:property name="ContactID" value="${row.ContactID}"  />
             <json:property name="FirstName" value="${row.FirstName}"  />
             <json:property name="MiddleName" value="${row.MiddleName}"  />
             <json:property name="LastName" value="${row.LastName}"  />
@@ -31,3 +28,4 @@
         </json:object>
     </json:array>
 </c:if>
+

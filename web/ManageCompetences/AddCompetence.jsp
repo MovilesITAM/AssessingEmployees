@@ -74,6 +74,12 @@
                                     View Statistics
                                 </a></li>
                             </c:if>
+                                <c:if test="${ sessionScope.ManageTask eq 'true' }" >
+                                <li><a href="../ManageTask/ManageTask.jsp">
+                                    <span class="glyphicon glyphicon-file textMenu"></span>
+                                        Manage Tasks
+                                </a></li>
+                            </c:if>
                         </ul>
                     </div>
                 </div>

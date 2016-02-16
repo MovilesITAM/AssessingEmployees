@@ -5,10 +5,10 @@
     maxActive="8" 
     maxIdle="4" 
     name="SqlAdmin" 
-    username="sa"
-    password="sqladmin" 
+    username="rlarahe"
+    password="1234abcd*" 
     removeAbandoned="true" 
     type="javax.sql.DataSource" 
-    url="jdbc:sqlserver://RICARDO-386;databaseName=AssessingEmployees" />		
+    url="jdbc:sqlserver://rlaraheitam.database.windows.net:1433;database=AssessingEmployee;user=rlarahe@rlaraheitam;password=1234abcd*;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;" />		
     
 </Context>

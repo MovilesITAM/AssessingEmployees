@@ -1,7 +1,10 @@
 $(document).ready(function () {
     var $selected;
     var $previous = '';
-
+    function isEmail(email) {
+        var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        return regex.test(email);
+    }
     var options1 = {
         scaleShowLine: true,
         angleShowLineOut: true,
@@ -108,40 +111,43 @@ $(document).ready(function () {
     var notes2;
     var data1;
     var data2;
-    $('input[type=email]').blur(function () {
+    $('input[type=email]').change(function () {
         var $this = $(this);
-        if ($this.val() != $previous) {
-            $previous = $this.val();
-            $.ajax({
-                dataType: 'json',
-                type: "POST",
-                url: "Ct-SelectDataGraph.jsp",
-                data: "Email=" + $this.val(),
-                success: function (data) {
-                    if ($this.attr('employee') == 1) {
-                        data1 = data;
-                    } else {
-                        data2 = data;
+        if (isEmail($(this).val())) {
+            if ($this.val() != $previous) {
+                $previous = $this.val();
+                $.ajax({
+                    dataType: 'json',
+                    type: "POST",
+                    url: "Ct-SelectDataGraph.jsp",
+                    data: "Email=" + $this.val(),
+                    success: function (data) {
+                        if ($this.attr('employee') == 1) {
+                            data1 = data;
+                        } else {
+                            data2 = data;
+                        }
+                        $.each(data, function (i, Object) {
+                            $('#Name' + $this.attr('employee')).val(Object.FirstName + " " + Object.LastName);
+                        });
+                        carga($this.attr('employee'));
                     }
-                    $.each(data, function (i, Object) {
-                        $('#Name' + $this.attr('employee')).val(Object.FirstName +" " +  Object.LastName);
-                    });
-                    carga($this.attr('employee'));
-                }
-            });
-            $.ajax({
-                dataType: 'json',
-                type: "POST",
-                url: "Ct-SelectNotes.jsp",
-                data: "Email=" + $this.val(),
-                success: function (data) {
-                    if ($this.attr('employee') == 1) {
-                        notes1 = data;
-                    } else {
-                        notes2 = data;
+                });
+                $.ajax({
+                    dataType: 'json',
+                    type: "POST",
+                    url: "Ct-SelectNotes.jsp",
+                    data: "Email=" + $this.val(),
+                    success: function (data) {
+                        if ($this.attr('employee') == 1) {
+                            notes1 = data;
+                        } else {
+                            notes2 = data;
+                        }
                     }
-                }
-            });
+                });
+            }
+
         }
 
     });
@@ -191,7 +197,7 @@ $(document).ready(function () {
     $('#email1').triggerHandler("blur");
     $('input[type=email]').on('keypress', function (event) {
         if (event.which === 13) {
-            $(this).triggerHandler("blur");
+            $(this).triggerHandler("change");
         }
     });
 

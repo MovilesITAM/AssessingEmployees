@@ -1,13 +1,14 @@
 <%-- 
-    Document   : ManageCompetences
-    Created on : 02-ene-2016, 21:56:16
+    Document   : ManageTaks
+    Created on : 07-feb-2016, 18:03:28
     Author     : Ricardo
 --%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
-<c:if test="${ sessionScope.ManageCompetences ne 'true' }" >
+<c:if test="${ sessionScope.ManageTask ne 'true' }" >
     <c:redirect url="../index.jsp"/>
 </c:if>
 <html>
@@ -55,25 +56,25 @@
 
                             <c:if test="${ sessionScope.ManageCompetences eq 'true' }" >
                                 <li><a href="../ManageCompetences/CompetencesManagement.jsp">
-                                    <span class="glyphicon glyphicon-list-alt textMenu"></span>
+                                        <span class="glyphicon glyphicon-list-alt textMenu"></span>
                                         Manage Competences and Jobs
-                                </a></li>
+                                    </a></li>
                                 <li><a href="../ManageCompetences/AddCompetence.jsp">
-                                    <span class="glyphicon glyphicon-pencil textMenu"></span>
-                                    Add Competences and Questions
-                                </a></li>
-                            </c:if>
-                            <c:if test="${ sessionScope.ApplyAssessment eq 'true' }" >
+                                        <span class="glyphicon glyphicon-pencil textMenu"></span>
+                                        Add Competences and Questions
+                                    </a></li>
+                                </c:if>
+                                <c:if test="${ sessionScope.ApplyAssessment eq 'true' }" >
                                 <li><a href="../ManageAssessment/CreateAssessment.jsp">
-                                    <span class="glyphicon glyphicon-file textMenu"></span>
+                                        <span class="glyphicon glyphicon-file textMenu"></span>
                                         Create Assessment
-                                </a></li>
+                                    </a></li>
                                 <li><a href="../ManageAssessment/EmployeeStatistics.jsp">
-                                    <span class="glyphicon glyphicon-signal textMenu"></span>
-                                    View Statistics
-                                </a></li>
-                            </c:if>
-                                <c:if test="${ sessionScope.ManageTask eq 'true' }" >
+                                        <span class="glyphicon glyphicon-signal textMenu"></span>
+                                        View Statistics
+                                    </a></li>
+                                </c:if>
+                                    <c:if test="${ sessionScope.ManageTask eq 'true' }" >
                                 <li><a href="../ManageTask/ManageTask.jsp">
                                     <span class="glyphicon glyphicon-file textMenu"></span>
                                         Manage Tasks
@@ -90,18 +91,18 @@
             <div class="row" id="row-profesor">           
                 <div class="container-profesor">
                     <div class="page-header-profesor generalTitle" >
-                        <h1 class="Unidad">Manage Competences and Jobs</h1>
+                        <h1 class="Unidad">Manage Tasks</h1>
                     </div>
                 </div>
                 <sql:query var="rsQuery" dataSource="SqlAdmin">
                     Select DepartmentID, Name from Department where CompanyID = ?
                     <sql:param value="${sessionScope.CompanyID}" />
                 </sql:query>
-                <div class="col-md-6">
+                <div class="col-md-6 small">
                     <div class="thumbnail GeneralDiv" >
                         <div class="caption" id="manageDiv">
-                            <h4>Manage Competences and Jobs</h4>
-                            <b>Department:</b>
+                            <h4>Statistics</h4>
+                            <b>Department</b>
                             <select class="form-control" name="DepartmentSelect">
                                 <option value="0">Choose Department</option>
                                 <c:forEach var="result" items="${rsQuery.rows}">
@@ -112,69 +113,78 @@
                             <select class="form-control" name="JobSelect">
                                 <option value="0">Choose Job</option>
                             </select>
-                            <br/>
-                            <b>Competences of the selected job:</b>
-                            <div class="table-responsive">    
-                                <table class="table table-hover" id="CompetencesTable">
-                                    <thead>
-                                        <tr>
-                                            <th> </th>
-                                            <th>Name</th>
-                                            <th>Rank</th>
-                                            <th>Details</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
-                            </div> 
-                            <br/>
-                            <b>Select a competence to add:</b>
-                            <select class="form-control" name="CompetencesSelect">
-                                <option value="0">Choose Competence</option>
+                            <b>Employee Name:</b>
+                            <select class="form-control" name="EmployeeSelect">
+                                <option value="0">Choose Employee</option>
                             </select>
+                            <canvas id="myChart1" width="380" height="400"></canvas>
+                            <div id="chartjs-tooltip"></div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 big">
                     <div class="thumbnail GeneralDiv">
 
                         <div class="caption">
-                            <h4>Competence</h4>
-                            <b>Competence Name:</b>
-                            <input type="text" class="form-control" placeholder="Name" name="CompetenceName" disabled="true" />
-                            <b>Competence Description:</b>
-                            <textarea class="form-control"  rows="3" name="CompetenceDescription" placeholder="Description" disabled="true"></textarea>
-                            <b>Rank:</b>
-                            <input type="text" class="form-control" placeholder="Rank" name="CompetenceRank" disabled="true" />
-                            <br/>
-                            Questions:
+                            <div id='leftRight'> 
+                                <h4>Add Task</h4>
+                                <b>Task Name:</b>
+                                <input type="text" class="form-control" placeholder="Name" name="TaskName" />
+                                <b class='input5Right' >Star Date:</b>
+                                <b class='input5Right'>End Date:</b>
+                                <br/>
+                                <input type="date"  class="form-control input5Right" name="StartDate" />
+
+                                <input type="date" class="form-control input5Right" name="EndDate" />
+                                <br/><br/>
+                                <b>Comments:</b>
+                                <textarea class="form-control"  rows="3" name="Comments" placeholder="Comments"></textarea>
+                                <br/>
+                                <input type="submit" id='addTask'  class="btn btn-success" value="Add Task"/>
+
+                            </div>
+                            <div id='rightRight'>
+                                <h4>Add Appraisal</h4>
+                                <b>Choose a competence to modify:</b>
+                                <select class="form-control" name="CompetenceSelect">
+                                    <option value="0">Choose competence</option>
+                                </select>
+                                <b>Weight to add:</b>
+                                <input type="number" step='2' class="form-control" name="Weight" />
+                                <b>Comments:</b>
+                                <textarea class="form-control"  rows="3" name="CommentsAppraisal" placeholder="Comments"></textarea><br/>
+                                <input type="submit" id='addWeight'  class="btn btn-success" value="Add Appraisal"/>
+                            </div>
+                                                            <br/>
                             <div class="table-responsive">    
-                                <table class="table table-hover" id="QuestionsTable">
+                                <table class="table table-hover" id="TaskTable">
                                     <thead>
                                         <tr>
-                                            <th>Question</th>
-                                            <th>Rank</th>
+                                            <th width="2%" ></th>
+                                            <th>Name</th>
+                                            <th>Start Date</th>
+                                            <th>End Date</th>
+                                            <th>Efficiency</th>
+                                            <th>Comments</th>
+                                            <th width="2%" >Done</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     </tbody>
                                 </table>
                             </div>
-                            <input type="submit" name="AddButton" class="btn btn-success" value="Add Competence" disabled="true"/>
                         </div>
                     </div>
                 </div>
             </div>
-
-
-
         </section>
 
         <!-- Scripts -->
         <script src="../Resources/js/jquery.js"></script>
         <script src="../Resources/js/bootstrap.min.js"></script>
-        <script src="../Resources/js/Js-CompetencesManagement.js"></script>
+        <script src="../Resources/js/Chart.js"></script>
+        <script src="../Resources/js/Js-ManageTask.js"></script>
+
 
     </body>
 </html>

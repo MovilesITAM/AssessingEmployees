@@ -73,6 +73,12 @@
                                     View Statistics
                                 </a></li>
                             </c:if>
+                                <c:if test="${ sessionScope.ManageTask eq 'true' }" >
+                                <li><a href="../ManageTask/ManageTask.jsp">
+                                    <span class="glyphicon glyphicon-file textMenu"></span>
+                                        Manage Tasks
+                                </a></li>
+                            </c:if>
                         </ul>
                     </div>
                 </div>
@@ -91,7 +97,7 @@
                     <div class="thumbnail GeneralDiv" >
                         <div class="caption" id="manageDiv">
                             <h4>Employee Statistics</h4>
-                            Please write the employee's email of which you want to see statistics
+                            Please write the employee's email of which you want to see statistics<br/>
                             Email:
                             <input class="form-control" id='email1' type="email" employee="1" value="${param.Email}" />
                             Name: 
@@ -107,6 +113,7 @@
 
                         <div class="caption">
                             <h4>Employee Statistics</h4>
+                            Please write the employee's email of which you want to see statistics<br/>
                             Email:
                             <input class="form-control" type="email" employee="2" />
                             Name: 

@@ -127,8 +127,8 @@
     float: left;
 }
 .input5Right{
-    width: 60%;
-    float: right;
+    width: 50%;
+    float: left;
 }
 
 #datetimepickerizquierda{
@@ -269,6 +269,12 @@
 .centralSide{
     width:97%;
 }
+.small{
+    width:35%;
+}
+.big{
+    width:65%;
+}
 
 .rightSide{
     width: 25%;
@@ -293,6 +299,9 @@
 }
 .rank{
     width:70px;
+}
+.date{
+    width:90%;
 }
 .container-profesor{
     margin-top: -57px;
@@ -378,6 +387,17 @@ section{
 body.wait *, body.wait
 {
     cursor: progress !important;
+}
+#leftRight{
+    border:1px;
+    float:left;
+    width:50%;
+}
+#rightRight{
+    border:1px;
+    padding-left: 20px;
+    float:left;
+    width:50%;
 }
 @media screen and (max-width:800px){
 	.derecha{
