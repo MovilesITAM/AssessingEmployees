@@ -23,11 +23,11 @@
                     <div class="navbar-collapse navbar-fixed-top" id="bs-example-navbar-collapse-1">
                         <form class="navbar-form navbar-right " role="search" method="POST" action="Ct-Login.jsp">
                             <div class="form-group ">
-                                <input type="text" class="form-control input-sm"  name="Email" placeholder="Email">
+                                <input type="text" class="form-control input-sm"  name="Email" placeholder="Email" required>
                             </div>
                             <div class="form-group">   
                                 <input type="password" class="form-control input-sm " name="Password" id="ejemplo_password_1" 
-                                       placeholder="Password">
+                                       placeholder="Password" required>
                             </div>
                             <button type="submit" class="btn btn-danger btn btn-primary btn-sm">Log In</button>
                         </form>
