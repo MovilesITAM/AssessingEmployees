@@ -11,7 +11,7 @@
 
 <c:if test="${pageContext.request.method == 'POST' }">
     <sql:query var="rsQuery" dataSource="SqlAdmin">
-        Select QuestionID, Question, Value, Deleted from Question where CompetenceID = ?
+        Select QuestionID, Question, Value, Deleted from Question where CompetenceID = ? and Deleted = 0 
         <sql:param value="${param.CompetenceID}" />
     </sql:query>
     <json:array name="Questions" var="row" items="${rsQuery.rows}">
