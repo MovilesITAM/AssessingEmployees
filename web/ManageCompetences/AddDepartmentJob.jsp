@@ -1,6 +1,6 @@
 <%-- 
-    Document   : ManageTaks
-    Created on : 07-feb-2016, 18:03:28
+    Document   : AddDepartmentJob
+    Created on : 28-feb-2016, 18:19:26
     Author     : Ricardo
 --%>
 
@@ -8,7 +8,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
-<c:if test="${ sessionScope.ManageTask ne 'true' }" >
+<c:if test="${ sessionScope.ManageCompetences ne 'true' }" >
     <c:redirect url="../index.jsp"/>
 </c:if>
 <html>
@@ -74,12 +74,12 @@
                                         View Statistics
                                     </a></li>
                                 </c:if>
-                                    <c:if test="${ sessionScope.ManageTask eq 'true' }" >
+                                <c:if test="${ sessionScope.ManageTask eq 'true' }" >
                                 <li><a href="../ManageTask/ManageTask.jsp">
-                                    <span class="glyphicon glyphicon-file textMenu"></span>
+                                        <span class="glyphicon glyphicon-file textMenu"></span>
                                         Manage Tasks
-                                </a></li>
-                            </c:if>
+                                    </a></li>
+                                </c:if>
                         </ul>
                     </div>
                 </div>
@@ -91,82 +91,60 @@
             <div class="row" id="row-profesor">           
                 <div class="container-profesor">
                     <div class="page-header-profesor generalTitle" >
-                        <h1 class="Unidad">Manage Tasks</h1>
+                        <h1 class="Unidad">Add Departments and Jobs</h1>
                     </div>
                 </div>
-                <sql:query var="rsQuery" dataSource="SqlAdmin">
-                    Select DepartmentID, Name from Department where CompanyID = ?
-                    <sql:param value="${sessionScope.CompanyID}" />
-                </sql:query>
-                <div class="col-md-6 small">
+                <div class="col-md-6 shortWidth">
                     <div class="thumbnail GeneralDiv" >
                         <div class="caption" id="manageDiv">
-                            <h4>Statistics</h4>
-                            <b>Department</b>
+                            <h4>Add Deparment</h4>
+                            <b>Department Name:</b> 
+                            <input class="form-control" type="text" required placeholder="Deparment Name" name="DepartmentName"><br/>
+                            <b>Description: </b> 
+                            <textarea class="form-control" required name="DepartmentDescription" placeholder="Description"></textarea>
+                            <br/>
+                            <input type="submit" id="btnAddDepartment" class="btn btn-success" value="Add Department"/>
+                            <hr/>
+                            <h4>Add Job</h4>
+                            <b>Select one department:</b> 
+                            <sql:query var="rsQuery" dataSource="SqlAdmin">
+                                Select DepartmentID, Name from Department where CompanyID = ?
+                                <sql:param value="${sessionScope.CompanyID}" />
+                            </sql:query>
                             <select class="form-control" name="DepartmentSelect">
                                 <option value="0">Choose Department</option>
                                 <c:forEach var="result" items="${rsQuery.rows}">
                                     <option value="<c:out value="${result.DepartmentID}" />"><c:out value="${result.Name}" /></option>
                                 </c:forEach>
-                            </select>
-                            <b>Job:</b>
-                            <select class="form-control" name="JobSelect">
-                                <option value="0">Choose Job</option>
-                            </select>
-                            <b>Employee Name:</b>
-                            <select class="form-control" name="EmployeeSelect">
-                                <option value="0">Choose Employee</option>
-                            </select>
-                            <canvas id="myChart1" width="380" height="400"></canvas>
-                            <div id="chartjs-tooltip"></div>
+                            </select>    
+                            <b>Job Name: </b> <input required class="form-control" type="text" name="JobName">
+                                <b>Description:</b> <textarea required class="form-control" name="JobDescription" placeholder="Descripcion"></textarea>
+                            <br/>
+                            <input type="submit" id="btnAddJob" class="btn btn-success" value="Add Job"/>
+
+
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 big">
-                    <div class="thumbnail GeneralDiv">
+                <div class="col-md-6 largeWidth">
+                    <div class="thumbnail GeneralDiv" >
 
                         <div class="caption">
-                            <div id='leftRight'> 
-                                <h4>Add Task</h4>
-                                <b>Task Name:</b>
-                                <input type="text" class="form-control" placeholder="Name" name="TaskName" />
-                                <b class='input5Right' >Star Date:</b>
-                                <b class='input5Right'>End Date:</b>
-                                <br/>
-                                <input type="date"  class="form-control input5Right" name="StartDate" />
-
-                                <input type="date" class="form-control input5Right" name="EndDate" />
-                                <br/><br/>
-                                <b>Comments:</b>
-                                <textarea class="form-control"  rows="3" name="Comments" placeholder="Comments"></textarea>
-                                <br/>
-                                <input type="submit" id='addTask'  class="btn btn-success" value="Add Task"/>
-
-                            </div>
-                            <div id='rightRight'>
-                                <h4>Add Appraisal</h4>
-                                <b>Choose a competence to modify:</b>
-                                <select class="form-control" name="CompetenceSelect">
-                                    <option value="0">Choose competence</option>
-                                </select>
-                                <b>Weight to add:</b>
-                                <input type="number" step='2' class="form-control" name="Weight" />
-                                <b>Comments:</b>
-                                <textarea class="form-control"  rows="3" name="CommentsAppraisal" placeholder="Comments"></textarea><br/>
-                                <input type="submit" id='addWeight'  class="btn btn-success" value="Add Appraisal"/>
-                            </div>
-                                                            <br/>
+                            <h4>Jobs</h4>
+                            <b>Select a department:</b>
+                            <select class="form-control" name="DepartmentSelectJob">
+                                <option value="0">Choose Department</option>
+                                <c:forEach var="result" items="${rsQuery.rows}">
+                                    <option value="<c:out value="${result.DepartmentID}" />"><c:out value="${result.Name}" /></option>
+                                </c:forEach>
+                            </select>
+                            <br/>
                             <div class="table-responsive">    
-                                <table class="table table-hover" id="TaskTable">
+                                <table class="table table-hover" id="JobTable" >
                                     <thead>
                                         <tr>
-                                            <th width="2%" ></th>
-                                            <th>Name</th>
-                                            <th>Start Date</th>
-                                            <th>End Date</th>
-                                            <th>Efficiency</th>
-                                            <th>Comments</th>
-                                            <th width="2%" >Done</th>
+                                            <th>Job Name</th>
+                                            <th>Job Description</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -177,14 +155,15 @@
                     </div>
                 </div>
             </div>
+
+
+
         </section>
 
         <!-- Scripts -->
         <script src="../Resources/js/jquery.js"></script>
         <script src="../Resources/js/bootstrap.min.js"></script>
-        <script src="../Resources/js/Chart.js"></script>
-        <script src="../Resources/js/Js-ManageTask.js"></script>
-
+        <script src="../Resources/js/Js-AddDepartmentJob.js"></script> 
 
     </body>
 </html>

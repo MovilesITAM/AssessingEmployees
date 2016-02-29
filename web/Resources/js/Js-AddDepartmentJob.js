@@ -13,10 +13,28 @@ $(document).ready(function(){
                     alert("Impossible to add the department. Check your session");
                 }else{
                     alert("Added Correctly");
-                    $('input[name=DepartmentName]').val(' ');
-                    $('textarea[name=DepartmentDescription]').val(' ');
+                    location.reload();
                 }
                 
+           }
+        });
+    });
+    $('select[name=DepartmentSelectJob]').change(function(){
+        var $DepartmentID = $(this).val();
+        $.ajax({
+            dataType: 'json',
+            type: "POST",
+            url: "Ct-SelectJob.jsp",
+            data: "DepartmentID=" + $DepartmentID,
+            success: function(data){
+                $("#JobTable").find('tbody').empty();
+                $.each(data, function (i, Job) {
+                    $("#JobTable").find('tbody').append($('<tr>').append($('<td>')
+                            .text(Job.Name))
+                        .append($('<td>')
+                            .text(Job.Description))
+                    );
+                });
            }
         });
     });
@@ -34,8 +52,7 @@ $(document).ready(function(){
             success: function(data){
                 if(data.Error == '0'){
                     alert("Job Added Correctly");
-                    $('input[name=JobName]').val(' ');
-                    $('textarea[name=JobDescription]').val(' ');
+                     location.reload();
                 }else if( data.error == '-1'){
                     alert("Impossible to add the job. Please check your session");
                 }else{

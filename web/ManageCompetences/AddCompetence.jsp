@@ -26,7 +26,7 @@
         <nav class="navbar navbar-default" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <h1 class="blanco">Assessing Employees<i> / Company Administrator </i></h1>                     
+                    <h1 class="blanco">Assessing Employees</h1>                     
                 </div>
                 <div class="navbar-form navbar-right" role="search">
                     <div class="btn-group">
