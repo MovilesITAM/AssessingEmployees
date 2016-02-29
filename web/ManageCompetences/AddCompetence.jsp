@@ -63,6 +63,10 @@
                                     <span class="glyphicon glyphicon-pencil textMenu"></span>
                                     Add Competences and Questions
                                 </a></li>
+                                <li><a href="../ManageCompetences/AddDepartmentJob.jsp">
+                                    <span class="glyphicon glyphicon-pencil textMenu"></span>
+                                    Add Jobs
+                                </a></li>
                             </c:if>
                             <c:if test="${ sessionScope.ApplyAssessment eq 'true' }" >
                                 <li><a href="../ManageAssessment/CreateAssessment.jsp">

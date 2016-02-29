@@ -115,7 +115,6 @@ $(document).ready(function () {
                 $.each(Competence.Questions, function (j, Quest) {
                     if (j == $index2) {
                         Quest.Rank = calculateValue(Quest);
-                        alert(Quest.Rank);
                     }
                 });
             }
