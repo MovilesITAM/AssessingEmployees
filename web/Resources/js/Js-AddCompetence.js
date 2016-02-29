@@ -3,28 +3,32 @@ $(document).ready(function () {
     $('#AddCompetence').click(function () {
         var $name = $('input[name=CompetenceName]').val();
         var $description = $('textarea[name=CompetenceDescription]').val();
-        $.ajax({
-            dataType: 'json',
-            type: "POST",
-            url: "Ct-AddCompetence.jsp",
-            data: "Name=" + $name +
-                    "&Description=" + $description,
-            success: function (data) {
-                if (data.Error == '1') {
-                    alert("Impossible to add the Competence. Check your session");
-                } else {
-                    alert("Added Correctly");
-                    $('select[name=CompetenceSelect]').append($('<option>', {
-                        value: data.CompetenceID,
-                        text: data.Name
-                    }));
-                    $("#QuestionsTable").find('tbody').empty();
-                    $('select[name=CompetenceSelect]').val(data.CompetenceID).change();
-                    $('input[name=CompetenceName]').val('');
-                    $('textarea[name=CompetenceDescription]').val('');
+        if($name.length>0 && $description.length>0){
+            $.ajax({
+                dataType: 'json',
+                type: "POST",
+                url: "Ct-AddCompetence.jsp",
+                data: "Name=" + $name +
+                        "&Description=" + $description,
+                success: function (data) {
+                    if (data.Error == '1') {
+                        alert("Impossible to add the Competence. Check your session");
+                    } else {
+                        alert("Added Correctly");
+                        $('select[name=CompetenceSelect]').append($('<option>', {
+                            value: data.CompetenceID,
+                            text: data.Name
+                        }));
+                        $("#QuestionsTable").find('tbody').empty();
+                        $('select[name=CompetenceSelect]').val(data.CompetenceID).change();
+                        $('input[name=CompetenceName]').val('');
+                        $('textarea[name=CompetenceDescription]').val('');
+                    }
                 }
-            }
-        });
+            });
+        }else{
+            alert("Please enter a Competence Name and a Competence Description");
+        }
     });
     $('#AddQuestion').click(function () {
         var $CompetenceID = $('select[name=CompetenceSelect]').val();
