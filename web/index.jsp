@@ -27,7 +27,7 @@
                             </div>
                             <div class="form-group">   
                                 <input type="password" class="form-control input-sm " name="Password" id="ejemplo_password_1" 
-                                       placeholder="Password" required>
+                                       placeholder="Password">
                             </div>
                             <button type="submit" class="btn btn-danger btn btn-primary btn-sm">Log In</button>
                         </form>
