@@ -200,6 +200,9 @@ $(document).ready(function () {
             $(this).triggerHandler("change");
         }
     });
+    var e = jQuery.Event("keypress");
+    e.which = 13; // # Some key code value
+    $("input[type=email]").trigger(e);
 
 });
 
