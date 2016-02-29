@@ -173,8 +173,8 @@
                         <p>...</p>
                     </div>
                 </div>
-            </div>
-            <div class="col-xs-6 col-sm-3">
+            </div> 
+           <div class="col-xs-6 col-sm-3">
                 <div class="thumbnail">
                     <img src="Resources/img/grid_2.jpg" data-src="holder.js/300x200" alt="...">
                     <div class="caption">

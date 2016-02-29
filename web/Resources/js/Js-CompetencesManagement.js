@@ -161,22 +161,27 @@ $(document).ready(function(){
         var $CompetenceID = $CompetencesNotJob[$index].CompetenceID;
         var $JobID = $('select[name=JobSelect]').val();
         var $Rank = $('input[name=CompetenceRank]').val();
-        $.ajax({
-            dataType: 'json',
-            type: "POST",
-            url: "Ct-AddCompetenceJob.jsp",
-            data: "Rank=" + $Rank +
-                  "&JobID="+$JobID +
-                  "&CompetenceID="+$CompetenceID,
-            success: function(data){
-                if(data.Error == '1'){
-                    alert("Impossible to add competence. Check your session");
-                }else{
-                    alert("Added Correctly");
-                    $('select[name=JobSelect]').trigger('change');
-                }
-           }
-        });
+        //We have a valid rank in the input 
+        if($Rank.length>0 && !isNaN($Rank)){
+            $.ajax({
+                dataType: 'json',
+                type: "POST",
+                url: "Ct-AddCompetenceJob.jsp",
+                data: "Rank=" + $Rank +
+                      "&JobID="+$JobID +
+                      "&CompetenceID="+$CompetenceID,
+                success: function(data){
+                    if(data.Error == '1'){
+                        alert("Impossible to add competence. Check your session");
+                    }else{
+                        alert("Added Correctly");
+                        $('select[name=JobSelect]').trigger('change');
+                    }
+               }
+            });
+        }else{
+            alert("Please enter a valid rank");
+        }
     });
     /*------------------ */
     $('select[name=CompetencesSelect]').change(function(){
