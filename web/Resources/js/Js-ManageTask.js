@@ -11,6 +11,15 @@ $(document).ready(function () {
             return false;
         }
     });
+    //Hide the task options
+    $("#taskDiv").hide();
+    $("#appraisalDiv").hide();
+    $("#btnTask").click(function(){
+        $("#taskDiv").toggle(600);
+    });
+    $("#btnAppraisal").click(function(){
+        $("#appraisalDiv").toggle(600);
+    });
     var options1 = {
         scaleShowLine: true,
         angleShowLineOut: true,
@@ -336,5 +345,5 @@ $(document).ready(function () {
             }
         });
     });
-
+    
 });

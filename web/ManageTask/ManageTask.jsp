@@ -18,7 +18,6 @@
         <link href='http://fonts.googleapis.com/css?family=Gilda+Display' rel='stylesheet' type='text/css'>
         <link href="../Resources/css/bootstrap.css" rel="stylesheet" media="screen">
         <link href="../Resources/css/main.css" rel="stylesheet" media="screen">
-
     </head>
     <body>
 
@@ -130,36 +129,6 @@
                     <div class="thumbnail GeneralDiv">
 
                         <div class="caption">
-                            <div id='leftRight'> 
-                                <h4>Add Task</h4>
-                                <b>Task Name:</b>
-                                <input type="text" class="form-control" placeholder="Name" name="TaskName" />
-                                <b class='input5Right' >Star Date:</b>
-                                <b class='input5Right'>End Date:</b>
-                                <br/>
-                                <input type="date"  class="form-control input5Right" name="StartDate" />
-
-                                <input type="date" class="form-control input5Right" name="EndDate" />
-                                <br/><br/>
-                                <b>Comments:</b>
-                                <textarea class="form-control"  rows="3" name="Comments" placeholder="Comments"></textarea>
-                                <br/>
-                                <input type="submit" id='addTask'  class="btn btn-success" value="Add Task"/>
-
-                            </div>
-                            <div id='rightRight'>
-                                <h4>Add Appraisal</h4>
-                                <b>Choose a competence to modify:</b>
-                                <select class="form-control" name="CompetenceSelect">
-                                    <option value="0">Choose competence</option>
-                                </select>
-                                <b>Weight to add:</b>
-                                <input type="number" step='2' class="form-control" name="Weight" />
-                                <b>Comments:</b>
-                                <textarea class="form-control"  rows="3" name="CommentsAppraisal" placeholder="Comments"></textarea><br/>
-                                <input type="submit" id='addWeight'  class="btn btn-success" value="Add Appraisal"/>
-                            </div>
-                                                            <br/>
                             <div class="table-responsive">    
                                 <table class="table table-hover" id="TaskTable">
                                     <thead>
@@ -177,6 +146,40 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <div id='leftRight'> 
+                                <h4>Add Task  <button id="btnTask" type="button" class="btn btn-default btn-sm"><span class="caret"></span></button></h4>
+                                <div id="taskDiv">
+                                    <b>Task Name:</b>
+                                    <input type="text" class="form-control" placeholder="Name" name="TaskName" />
+                                    <b class='input5Right' >Star Date:</b>
+                                    <b class='input5Right'>End Date:</b>
+                                    <br/>
+                                    <input type="date"  class="form-control input5Right" name="StartDate" />
+
+                                    <input type="date" class="form-control input5Right" name="EndDate" />
+                                    <br/><br/>
+                                    <b>Comments:</b>
+                                    <textarea class="form-control"  rows="3" name="Comments" placeholder="Comments"></textarea>
+                                    <br/>
+                                    <input type="submit" id='addTask'  class="btn btn-success" value="Add Task"/>
+                                </div>
+                            </div>
+                            <div id='rightRight'>
+                                <h4>Add Appraisal  <button id="btnAppraisal" type="button" class="btn btn-default btn-sm"><span class="caret"></span></button></h4>
+                                <div id="appraisalDiv">
+                                    <b>Choose a competence to modify:</b>
+                                    <select class="form-control" name="CompetenceSelect">
+                                        <option value="0">Choose competence</option>
+                                    </select>
+                                    <b>Weight to add:</b>
+                                    <input type="number" step='2' class="form-control" name="Weight" />
+                                    <b>Comments:</b>
+                                    <textarea class="form-control"  rows="3" name="CommentsAppraisal" placeholder="Comments"></textarea><br/>
+                                    <input type="submit" id='addWeight'  class="btn btn-success" value="Add Appraisal"/>
+                                </div>
+                            </div>
+                                                            <br/>
+                            
                         </div>
                     </div>
                 </div>
