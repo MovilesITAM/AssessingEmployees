@@ -3,6 +3,14 @@ $(document).ready(function () {
     $('#AddCompetence').click(function () {
         var $name = $('input[name=CompetenceName]').val();
         var $description = $('textarea[name=CompetenceDescription]').val();
+        if( $name.trim().length <= 5 ){
+            alert("Please write a complete name.");
+            return;
+        }
+        if( $description.trim().length <= 5 ){
+            alert("Please write a complete description.");
+            return;
+        }
         if($name.length>0 && $description.length>0){
             $.ajax({
                 dataType: 'json',
@@ -34,6 +42,14 @@ $(document).ready(function () {
         var $CompetenceID = $('select[name=CompetenceSelect]').val();
         var $Question = $('input[name=Question]').val();
         var $Value = $('input[name=Value]').val();
+        if( $CompetenceID == 0 ){
+            alert("Please select a competence.");
+            return;
+        }
+        if( $Question.trim().length <= 5 ){
+            alert("Please write a complete question.");
+            return;
+        }
         $.ajax({
             dataType: 'json',
             type: "POST",

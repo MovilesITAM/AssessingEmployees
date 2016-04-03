@@ -14,7 +14,7 @@
     <sql:query var="rsQuery" dataSource="SqlAdmin">
         select C.CompanyID, C.CompetenceID, C.Name, C.Description, CJ.Rank from Competence as C
             inner join CompetenceJob as CJ on C.CompetenceID = CJ.CompetenceID
-                where CJ.JobID = ? order by CJ.Rank desc
+                where CJ.JobID = ? order by CJ.Rank asc
         <sql:param value="${param.JobID}" />
     </sql:query>
     

@@ -55,34 +55,34 @@
 
                             <c:if test="${ sessionScope.ManageCompetences eq 'true' }" >
                                 <li><a href="../ManageCompetences/CompetencesManagement.jsp">
-                                    <span class="glyphicon glyphicon-list-alt textMenu"></span>
+                                        <span class="glyphicon glyphicon-list-alt textMenu"></span>
                                         Manage Competences and Jobs
-                                </a></li>
+                                    </a></li>
                                 <li><a href="../ManageCompetences/AddCompetence.jsp">
-                                    <span class="glyphicon glyphicon-pencil textMenu"></span>
-                                    Add Competences and Questions
-                                </a></li>
+                                        <span class="glyphicon glyphicon-pencil textMenu"></span>
+                                        Add Competences and Questions
+                                    </a></li>
                                 <li><a href="../ManageCompetences/AddDepartmentJob.jsp">
-                                    <span class="glyphicon glyphicon-pencil textMenu"></span>
-                                    Add Jobs
-                                </a></li>
-                            </c:if>
-                            <c:if test="${ sessionScope.ApplyAssessment eq 'true' }" >
+                                        <span class="glyphicon glyphicon-pencil textMenu"></span>
+                                        Add Jobs
+                                    </a></li>
+                                </c:if>
+                                <c:if test="${ sessionScope.ApplyAssessment eq 'true' }" >
                                 <li><a href="../ManageAssessment/CreateAssessment.jsp">
-                                    <span class="glyphicon glyphicon-file textMenu"></span>
+                                        <span class="glyphicon glyphicon-file textMenu"></span>
                                         Create Assessment
-                                </a></li>
+                                    </a></li>
                                 <li><a href="../ManageAssessment/EmployeeStatistics.jsp">
-                                    <span class="glyphicon glyphicon-signal textMenu"></span>
-                                    View Statistics
-                                </a></li>
-                            </c:if>
+                                        <span class="glyphicon glyphicon-signal textMenu"></span>
+                                        View Statistics
+                                    </a></li>
+                                </c:if>
                                 <c:if test="${ sessionScope.ManageTask eq 'true' }" >
                                 <li><a href="../ManageTask/ManageTask.jsp">
-                                    <span class="glyphicon glyphicon-file textMenu"></span>
+                                        <span class="glyphicon glyphicon-file textMenu"></span>
                                         Manage Tasks
-                                </a></li>
-                            </c:if>
+                                    </a></li>
+                                </c:if>
                         </ul>
                     </div>
                 </div>
@@ -124,7 +124,6 @@
                                         <tr>
                                             <th> </th>
                                             <th>Name</th>
-                                            <th>Rank</th>
                                             <th>Details</th>
                                         </tr>
                                     </thead>
@@ -177,6 +176,7 @@
 
         <!-- Scripts -->
         <script src="../Resources/js/jquery.js"></script>
+        <script src="../Resources/js/jquery-ui.js"></script>
         <script src="../Resources/js/bootstrap.min.js"></script>
         <script src="../Resources/js/Js-CompetencesManagement.js"></script>
 
