@@ -17,7 +17,7 @@
 </c:if>
 <sql:query var="rsQuery" dataSource="SqlAdmin">
     spAddAssessment ?,?
-    <sql:param value="${param.EmployeeID}" />
+    <sql:param value="${param.EmployeeSelect}" />
     <sql:param value="${sessionScope.ContactID}" />
 </sql:query>
 <c:forEach var="result" items="${rsQuery.rows}">
@@ -108,7 +108,7 @@
             Select * from Competence as C
             inner join CompetenceJob as CJ on C.CompetenceID = CJ.CompetenceID
             where CJ.JobID = ? 
-            <sql:param value="${param.JobID}" />
+            <sql:param value="${param.JobSelect}" />
         </sql:query>
         <section class="centralSide">
             <div class="row" id="row-profesor">           
@@ -167,13 +167,12 @@
                         <input type="hidden" value="<c:out value="${AssessmentID}"/>" name="AssessmentID" />
                         <b>Name of the Job:</b>
                         <input type="text" class="form-control" value="<c:out value="${param.JobName}"/>" readonly />
-                        <input type="hidden" name="JobID" class="form-control" value="<c:out value="${param.JobID}"/>" />
+                        <input type="hidden" name="JobID" class="form-control" value="<c:out value="${param.JobSelect}"/>" />
+                        <input type="hidden" name="EmployeeID" class="form-control" value="<c:out value="${param.EmployeeSelect}"/>" />
                         <br/>
                         <b>Name of the Employee:</b>
                         <input type="text" class="form-control" value="<c:out value="${param.EmployeeName}"/>" readonly />
                         <br/>
-                        Email of the Employee:
-                        <input type="text" name='Email' class="form-control" value="<c:out value="${param.Email}"/>" readonly />
                         <b>Time when you started: </b>
                         <input type="text" class="form-control" value="<c:out value="${StartDate}"/>" readonly /><br/>
                         

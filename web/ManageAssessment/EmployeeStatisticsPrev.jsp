@@ -1,6 +1,6 @@
 <%-- 
-    Document   : ManageCompetences
-    Created on : 02-ene-2016, 21:56:16
+    Document   : EmployeeStatistics
+    Created on : 20-ene-2016, 21:43:37
     Author     : Ricardo
 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -77,12 +77,12 @@
                                     View Statistics
                                 </a></li>
                             </c:if>
-                            <c:if test="${ sessionScope.ManageTask eq 'true' }" >
+                                <c:if test="${ sessionScope.ManageTask eq 'true' }" >
                                 <li><a href="../ManageTask/ManageTask.jsp">
                                     <span class="glyphicon glyphicon-file textMenu"></span>
                                         Manage Tasks
                                 </a></li>
-                            </c:if>    
+                            </c:if>
                         </ul>
                     </div>
                 </div>
@@ -94,39 +94,21 @@
             <div class="row" id="row-profesor">           
                 <div class="container-profesor">
                     <div class="page-header-profesor generalTitle" >
-                        <h1 class="Unidad">Create Assessment</h1>
+                        <h1 class="Unidad">Employee's Statistics</h1>
                     </div>
                 </div>
-                 <sql:query var="rsQuery" dataSource="SqlAdmin">
-                    Select DepartmentID, Name from Department where CompanyID = ?
-                    <sql:param value="${sessionScope.CompanyID}" />
-                </sql:query>
                 <div class="col-md-6">
                     <div class="thumbnail GeneralDiv" >
                         <div class="caption" id="manageDiv">
-                            <h4>Create Assessment</h4>
-                            <form id="formAssessment" action="ApplyAssessment.jsp" method="POST">
-                            <b>Department</b>
-                            <select class="form-control" name="DepartmentSelect">
-                                <option value="0">Choose Department</option>
-                                <c:forEach var="result" items="${rsQuery.rows}">
-                                    <option value="<c:out value="${result.DepartmentID}" />"><c:out value="${result.Name}" /></option>
-                                </c:forEach>
-                            </select>
-                            <b>Job:</b>
-                            <select class="form-control" name="JobSelect">
-                                <option value="0">Choose Job</option>
-                            </select>
-                            <b>Employee Name:</b>
-                            <select class="form-control" name="EmployeeSelect">
-                                <option value="0">Choose Employee</option>
-                            </select>
+                            <h4>Employee Statistics</h4>
+                            Please write the employee's email of which you want to see statistics<br/>
+                            Email:
+                            <input class="form-control" id='email1' type="email" employee="1" value="${param.Email}" />
+                            Name: 
+                            <input class="form-control" type="text" id="Name1" disabled="true" />
                             <br/>
-                            <input type="hidden" name="JobName" readonly/>
-                            <input type="hidden" name="EmployeeName" readonly/>
-                            <input type="submit" id="createAssessment" class="btn btn-success" value="Create Assessment" />
-                            <br/><br/>
-                            </form>
+                            <canvas id="myChart1" width="500" height="390"></canvas>
+                            <div id="chartjs-tooltip"></div>
                         </div>
                     </div>
                 </div>
@@ -134,34 +116,27 @@
                     <div class="thumbnail GeneralDiv">
 
                         <div class="caption">
-                            <h4>See the Questions of the Job</h4>
-                            <b>Competences of the job:</b>
-                            <select class="form-control" name="CompetenceSelect">
-                                <option value="-1">Choose Competence</option>
-                            </select>
-                            <div class="table-responsive">    
-                                <table class="table table-hover" id="QuestionsTable">
-                                    <thead>
-                                        <tr>
-                                            <th>Question</th>
-                                            <th>Weight</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
-                            </div>
+                            <h4>Employee Statistics</h4>
+                            Please write the employee's email of which you want to see statistics<br/>
+                            Email:
+                            <input class="form-control" type="email" employee="2" />
+                            Name: 
+                            <input class="form-control" type="text" id="Name2" disabled="true" />
+                            <br/>
+                            <canvas id="myChart2" width="500" height="390"></canvas>
+                            <div id="chartjs-tooltip2"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
+
         <!-- Scripts -->
         <script src="../Resources/js/jquery.js"></script>
-        <script src="../Resources/js/bootstrap.min.js"></script>
-        <script src="../Resources/js/Js-CreateAssessment.js"></script>
-        <script src="../Resources/js/Js-GeneralAJAX.js"></script>
+    <script src="../Resources/js/bootstrap.min.js"></script>
+    <script src="../Resources/js/Chart.js"></script>
+    <script src="../Resources/js/Js-EmployeeStatistics.js"></script>
 
 
     </body>

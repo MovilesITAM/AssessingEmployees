@@ -121,21 +121,15 @@
                 <div class="item active" id="Completo">
                     <img src="Resources/img/banner.jpg" alt="imagen1">
                     <div class="carousel-caption">
-                        <h1><b>Assessing Employees</b></h1>
-                        <h3>Lorem ipsum ad his scripta blandit partiendo</h3>
+                        <h1><b></b></h1>
+                        <h3></h3>
                     </div>
                 </div>
 
                 <div class="item"><img  src="Resources/img/banner1.png" alt="banner2" />
                     <div class="carousel-caption">
-                        <h1><b>Assessing Employees</b></h1>
-                        <h3>Lorem ipsum ad his scripta blandit partiendo</h3>
-                    </div>
-                </div>
-                <div class="item"><img  src="Resources/img/banner2.png" alt="banner2" />
-                    <div class="carousel-caption">
-                        <h1><b>Assessing Employees</b></h1>
-                        <h3>Lorem ipsum ad his scripta blandit partiendo</h3>
+                        <h1><b></b></h1>
+                        <h3></h3>
                     </div>
                 </div>
             </div>

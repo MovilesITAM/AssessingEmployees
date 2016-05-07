@@ -159,7 +159,7 @@ $(document).ready(function () {
             data: "AssessmentID=" + $AssessmentID,
             success: function (data) {
                 // REDIRECT TO THE GRAPHICS
-                location.href = 'EmployeeStatistics.jsp?Email=' + $('input[name=Email]').val();
+                location.href = 'EmployeeStatistics.jsp?EmployeeID=' + $('input[name=EmployeeID]').val();
             }, error: function () {
                 alert('Session Error');
             }
@@ -182,7 +182,7 @@ $(document).ready(function () {
                     $('input[name=Result]').removeAttr("checked");
                     if( $("select[name=CompetenceSelect] option").size() == 1 ){
                         $('#nextQuestion').attr('disabled','disabled'); 
-                        alert("Assessment is over");
+                        alert("Assessment is over.");
                         $finished = true;
                         finishAssessment();
                     }

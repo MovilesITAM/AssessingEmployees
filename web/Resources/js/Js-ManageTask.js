@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    var Employees;
     var dataG;
     var notes;
     var Tasks;
@@ -70,73 +69,6 @@ $(document).ready(function () {
             });
         }
     };
-    $('select[name=DepartmentSelect]').change(function () {
-        var $DepartmentID = $('select[name=DepartmentSelect]').val();
-        $.ajax({
-            dataType: 'json',
-            type: "POST",
-            url: "../ManageCompetences/Ct-SelectJob.jsp",
-            data: "DepartmentID=" + $DepartmentID,
-            success: function (data) {
-                $('select[name=JobSelect]').empty();
-                $('select[name=JobSelect]').append($('<option>', {
-                    value: 0,
-                    text: 'Choose Job'
-                }));
-
-                $.each(data, function (i, Job) {
-                    $('select[name=JobSelect]').append($('<option>', {
-                        value: Job.JobID,
-                        text: Job.Name
-                    }));
-                });
-            }
-        });
-
-    });
-    $('select[name=JobSelect]').change(function () {
-        var $JobID = $('select[name=JobSelect]').val();
-        $.ajax({
-            dataType: 'json',
-            type: "POST",
-            url: "Ct-SelectEmployeeJob.jsp",
-            data: "JobID=" + $JobID,
-            success: function (data) {
-                Employees = data;
-                $('select[name=EmployeeSelect]').empty();
-                $('select[name=EmployeeSelect]').append($('<option>', {
-                    value: 0,
-                    text: 'Choose Employee'
-                }));
-                $.each(data, function (i, Employee) {
-                    $('select[name=EmployeeSelect]').append($('<option>', {
-                        value: Employee.EmployeeID,
-                        text: Employee.FirstName + ' ' + Employee.LastName
-                    }));
-
-                });
-            }
-        });
-        $.ajax({
-            dataType: 'json',
-            type: "POST",
-            url: "../ManageCompetences/Ct-SelectCompetencesJob.jsp",
-            data: "JobID=" + $JobID,
-            success: function (data) {
-                $('select[name=CompetenceSelect]').empty();
-                $('select[name=CompetenceSelect]').append($('<option>', {
-                    value: 0,
-                    text: 'Choose Competence'
-                }));
-                $.each(data, function (i, Competence) {
-                    $('select[name=CompetenceSelect]').append($('<option>', {
-                        value: Competence.CompetenceID,
-                        text: Competence.Name
-                    }));
-                });
-            }
-        });
-    });
     function chargeTask() {
         var $EmployeeID = $('select[name=EmployeeSelect]').val();
         $.ajax({
@@ -176,13 +108,8 @@ $(document).ready(function () {
         });
     }
     $('select[name=EmployeeSelect]').change(function () {
-        var $email;
         var $employeeId = $(this).val();
-        $.each(Employees, function (i, Employee) {
-            if (Employee.EmployeeID == $employeeId)
-                $email = Employee.EmailAddress
-        });
-        charge($email);
+        charge($employeeId);
         chargeTask();
     });
     function makeGraph() {
@@ -213,12 +140,12 @@ $(document).ready(function () {
         var myRadarChart = new Chart(ctx1).Radar(data, options1);
 
     }
-    function charge($email) {
+    function charge($EmployeeID) {
         $.ajax({
             dataType: 'json',
             type: "POST",
             url: "../ManageAssessment/Ct-SelectDataGraph.jsp",
-            data: "Email=" + $email,
+            data: "EmployeeID=" + $EmployeeID,
             success: function (data) {
                 dataG = data;
                 makeGraph();
@@ -228,7 +155,7 @@ $(document).ready(function () {
             dataType: 'json',
             type: "POST",
             url: "../ManageAssessment/Ct-SelectNotes.jsp",
-            data: "Email=" + $email,
+            data: "EmployeeID=" + $EmployeeID,
             success: function (data) {
                 notes = data;
             }

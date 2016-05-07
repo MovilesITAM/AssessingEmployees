@@ -17,18 +17,18 @@
 	inner join Assessment as A on Ar.AssessmentID = A.AssessmentID
 	inner join Employee as E on E.EmployeeID = A.EmployeeID
 	inner join Contact as CO on E.ContactID = CO.ContactID
-	where CO.EmailAddress = ? and DATALENGTH(Ar.Notes) > 0 
+	where E.EmployeeID = ? and DATALENGTH(Ar.Notes) > 0 
 		and A.StartDate in (
 				Select top 1 Assessment.StartDate from Assessment 
 					inner join Employee on Assessment.EmployeeID = Employee.EmployeeID
 					inner join Contact on Employee.ContactID = Contact.ContactID
-					where Contact.EmailAddress = ?
+					where Employee.EmployeeID = ?
 					order by Assessment.StartDate desc
 			)
 	
 	order by C.CompetenceID desc
-        <sql:param value="${param.Email}" />
-        <sql:param value="${param.Email}" />
+        <sql:param value="${param.EmployeeID}" />
+        <sql:param value="${param.EmployeeID}" />
     </sql:query>
         
         <json:array name="Competences" var="row" items="${rsQuery.rows}">

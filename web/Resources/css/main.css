@@ -23,6 +23,11 @@
    margin-left: 10px;
    overflow:  scroll;
 }
+.GeneralDivNoScroll{
+    height: 600px !important;
+   margin-left: 10px;
+   overflow: no-display;
+}
 #manageDiv{
     min-height: 460px;
 }
@@ -66,7 +71,7 @@
 }
 
 #divTotal{
-    width: 100% !important;
+    width: 100% 
 }
 
 #asistenciaDerechaMayor{
@@ -415,6 +420,9 @@ body.wait *, body.wait
         .navbar{
             padding-bottom:200px;
         }
+}
+#cStatistics{
+    width:100%;
 }
 
 

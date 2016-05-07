@@ -41,7 +41,11 @@ $(document).ready(function () {
     $('#AddQuestion').click(function () {
         var $CompetenceID = $('select[name=CompetenceSelect]').val();
         var $Question = $('input[name=Question]').val();
-        var $Value = $('input[name=Value]').val();
+        var $Value = parseFloat($('input[name=Value]').val());
+        if( $Value > 1 || $Value <= 0 ){
+            alert("Weight must be between 0 and 1");
+            return;
+        }
         if( $CompetenceID == 0 ){
             alert("Please select a competence.");
             return;
@@ -61,18 +65,10 @@ $(document).ready(function () {
                 if (data.Error == '1') {
                     alert("Impossible to add the Question. Check your session");
                 } else {
-                    $('input[name=Question]').val('');
-                    $('input[name=Value]').val('');
-                    $("#QuestionsTable").find('tbody').append($('<tr>')
-                            .append($('<td>')
-                                    .text($Question)
-                                    ).append($('<td>')
-                            .text(data.Value)
-                            )
-                            );
-
                     alert("Question Added Correctly");
-
+                    $('input[name=Question]').val("");
+                    $('input[name=Value]').val("");
+                    $('select[name=CompetenceSelect]').change();
                 }
             }
         });
@@ -126,6 +122,8 @@ $(document).ready(function () {
                 }
 
             });
+            
+            
         }
         
         $(document).on('change', 'input[name=EditQuestion]', function () {
@@ -163,6 +161,9 @@ $(document).ready(function () {
 
             });
             updateQuestion($index);
+            $index = parseInt($index);
+            $('#QuestionsTable tr').eq($index+1).hide();
+            //$('select[name=CompetenceSelect]').change();
         });
     });
 

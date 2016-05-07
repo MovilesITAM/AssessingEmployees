@@ -132,14 +132,14 @@
                             <b>Question:</b>
                             <input type="text" class="form-control" placeholder="Question" name="Question" />    
                             <b>Weight</b>
-                            <input type="text" class="form-control" placeholder="Weight" name="Value" />    
+                            <input type="number"  step=".1" min="0" max="1" class="form-control" placeholder="Weight" name="Value" />    
                             <br/><input type="submit" id="AddQuestion" class="btn btn-success" value="Add Question"/>
                             <br/>
                             <div class="table-responsive">    
                                 <table class="table table-hover" id="QuestionsTable">
                                     <thead>
                                         <tr>
-                                            <th  width="2%" > </th>
+                                            <th  width="2%" ></th>
                                             <th>Question</th>
                                             <th  width="2%">Weight</th>
                                         </tr>

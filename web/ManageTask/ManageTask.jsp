@@ -191,6 +191,7 @@
         <script src="../Resources/js/bootstrap.min.js"></script>
         <script src="../Resources/js/Chart.js"></script>
         <script src="../Resources/js/Js-ManageTask.js"></script>
+        <script src="../Resources/js/Js-GeneralAJAX.js"></script>
 
 
     </body>
