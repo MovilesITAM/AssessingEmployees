@@ -2,6 +2,7 @@ $(document).ready(function () {
     var dataG;
     var notes;
     var $AssessmentID;
+    var myRadarChart;
     var ctx1 = $("#myChart1").get(0).getContext("2d");
     var options1 = {
         scaleShowLine: true,
@@ -54,6 +55,8 @@ $(document).ready(function () {
         }
     };
     $('select[name=EmployeeSelect]').change(function () {
+        $('#GeneralNotes').empty();
+        $AssessmentID = -1;
         var $employeeId = $(this).val();
         charge($employeeId);
     });
@@ -82,8 +85,19 @@ $(document).ready(function () {
                     data: $values
                 }]
         }
-        var myRadarChart = new Chart(ctx1).Radar(data, options1);
-
+        myRadarChart = new Chart(ctx1).Radar(data, options1);
+        $.ajax({
+            dataType: 'json',
+            type: "POST",
+            url: "../ManageAssessment/Ct-SelectGeneralNotes.jsp",
+            data: "AssessmentID=" + $AssessmentID,
+            success: function (dataNotes) {
+                $.each(dataNotes, function (i, note) {
+                    $('#GeneralNotes').empty();
+                    $('#GeneralNotes').html(note.GeneralNote);
+                });
+            }
+        });
     }
     function charge($EmployeeID) {
         $.ajax({
@@ -93,7 +107,15 @@ $(document).ready(function () {
             data: "EmployeeID=" + $EmployeeID,
             success: function (data) {
                 dataG = data;
-                makeGraph();
+                var $exists = false;
+                $.each(dataG, function (i, Object) {
+                    $exists = true;
+                });
+                if( !$exists ){
+                    myRadarChart.destroy();
+                    alert("You've not done an assessment for this employee");
+                }else
+                    makeGraph();
             }
         });
         $.ajax({

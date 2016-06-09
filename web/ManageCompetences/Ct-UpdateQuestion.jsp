@@ -2,6 +2,10 @@
     Document   : Ct-UpdateQuestion
     Created on : 31-ene-2016, 22:21:12
     Author     : Ricardo
+
+    This page is the one who update questions of the assessment.
+    Returns error=1 if user doesn't have permissions or if the sesssion is over
+    Params: @Question(Text), @Deleted, @Value(Rate), @QuestionID
 --%>
 <%@page contentType="application/json" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>

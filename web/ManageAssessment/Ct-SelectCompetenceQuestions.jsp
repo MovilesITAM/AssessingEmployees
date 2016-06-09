@@ -23,13 +23,13 @@
             <json:property name="ActualQuestion" value="0"  />
             
             <sql:query var="rsQuery" dataSource="SqlAdmin">
-                Select QuestionID, Question, Value from Question where CompetenceID = ? and Deleted = 0 ORDER BY NEWID()
+                Select QuestionID, Question, Value from Question where CompetenceID = ? and Deleted = 0
                 <sql:param value="${row2.CompetenceID}" />
             </sql:query>
             <json:array name="Questions" var="row" items="${rsQuery.rows}">
                 <json:object>
                     <json:property name="QuestionID" value="${row.QuestionID}"  />
-                    <json:property name="Question" value="${row.Question}"  />
+                    <json:property name="Question" escapeXml="false" value="${row.Question}"  />
                     <json:property name="Value" value="${row.Value}"  />
                     <json:property name="Notes" value=" "  />
                     <json:property name="Rank" value=" "  />

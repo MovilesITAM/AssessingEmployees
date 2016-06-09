@@ -31,6 +31,7 @@
         <link href='http://fonts.googleapis.com/css?family=Gilda+Display' rel='stylesheet' type='text/css'>
         <link href="../Resources/css/bootstrap.css" rel="stylesheet" media="screen">
         <link href="../Resources/css/main.css" rel="stylesheet" media="screen">
+        <link href="../Resources/css/jquery-te-1.4.0.css" rel="stylesheet" media="screen">
 
     </head>
     <body>
@@ -118,10 +119,10 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="thumbnail GeneralDiv" >
+                    <div class="thumbnail GeneralDivNoScroll" >
                         <div class="caption" id="manageDiv">
-                            <h4>Assessment</h4>
-
+                            <h3><c:out value="${param.JobName}${' : '}${param.EmployeeName}"/></h3>
+                            
                             <b>Competences:</b>
                             <select class="form-control" name="CompetenceSelect">
                                 <option value="0">Choose a competence</option>
@@ -129,13 +130,8 @@
                                     <option value="<c:out value="${result.CompetenceID}" />"><c:out value="${result.Name}" /></option>
                                 </c:forEach>
                             </select>
-                            <%-- <b>Questions:</b>
-                            <select class="form-control" name="QuestionsSelect">
-                                <option value="0">Choose Question</option>
-                            </select>
-                            <br/>--%>
                             <b>Questions:</b>
-                            <textarea readonly class="form-control"  id="QuestionText"rows="3" name="QuestionText" placeholder="Question"></textarea>
+                            <textarea readonly class="form-control"  id="QuestionText" rows="3" name="QuestionText" placeholder="Question"></textarea>
                             <br/>
                             <table>
                                 <tr>
@@ -156,26 +152,21 @@
                             <textarea class="form-control"  rows="3" name="Notes" placeholder="Notes"></textarea>
                             <br/>
                             <input type="submit" id="nextQuestion" class="btn btn-success" value="Next Question" />
+                            <input type="submit" id="finish" class="btn btn-success" value="Finish Assessment" />
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="thumbnail GeneralDiv">
+                    <div class="thumbnail GeneralDivNoScroll">
 
                         <div class="caption">
-                            <h4>Assessment</h4>
                         <input type="hidden" value="<c:out value="${AssessmentID}"/>" name="AssessmentID" />
-                        <b>Name of the Job:</b>
-                        <input type="text" class="form-control" value="<c:out value="${param.JobName}"/>" readonly />
                         <input type="hidden" name="JobID" class="form-control" value="<c:out value="${param.JobSelect}"/>" />
                         <input type="hidden" name="EmployeeID" class="form-control" value="<c:out value="${param.EmployeeSelect}"/>" />
-                        <br/>
-                        <b>Name of the Employee:</b>
-                        <input type="text" class="form-control" value="<c:out value="${param.EmployeeName}"/>" readonly />
-                        <br/>
                         <b>Time when you started: </b>
                         <input type="text" class="form-control" value="<c:out value="${StartDate}"/>" readonly /><br/>
-                        
+                        <b>General Note:</b>
+                        <textarea id="GeneralNote" rows="30"></textarea>
                         </div>
                     </div>
                 </div>
@@ -185,6 +176,7 @@
 
     <!-- Scripts -->
     <script src="../Resources/js/jquery.js"></script>
+    <script src="../Resources/js/jquery-te-1.4.0.min.js"></script>
     <script src="../Resources/js/bootstrap.min.js"></script>
     <script src="../Resources/js/Js-ApplyAssessment.js"></script>
 

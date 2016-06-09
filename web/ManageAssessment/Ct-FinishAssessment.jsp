@@ -9,22 +9,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@ taglib prefix="json" uri="http://www.atg.com/taglibs/json" %>
 
-<c:choose>
-    <c:when test="${sessionScope.ApplyAssessment eq 'true'  }" >
-        <c:if test="${pageContext.request.method == 'POST' }">
-            <sql:update var="rsQuery" dataSource="SqlAdmin">
-                spFinishAssessment ?
-                <sql:param value="${param.AssessmentID}" />
-            </sql:update>
-            <json:object>
-                <json:property name="Error" value="0"  />
-            </json:object>
-        </c:if>
-</c:when>
-    <c:otherwise>
-        <json:object>
-                <json:property name="Error" value="1"  />
-            </json:object>
-    </c:otherwise>
-</c:choose>
-        
+<c:if test="${pageContext.request.method == 'POST' }">
+    <sql:update var="rsQuery" dataSource="SqlAdmin">
+        spFinishAssessment ?
+        <sql:param value="${param.AssessmentID}" />
+    </sql:update>
+    <sql:update var="rsQuery" dataSource="SqlAdmin">
+        Update Assessment set GeneralNote = ?
+        where AssessmentId = ?
+        <sql:param value="${param.GeneralNote}" />
+        <sql:param value="${param.AssessmentID}" />
+    </sql:update>
+    <json:object>
+        <json:property name="Error" value="0"  />
+    </json:object>
+</c:if>

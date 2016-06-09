@@ -101,7 +101,7 @@
                     Select DepartmentID, Name from Department where CompanyID = ?
                     <sql:param value="${sessionScope.CompanyID}" />
                 </sql:query>
-                <div class="col-md-6" id="cStatistics">
+                <div class="col-md-6">
                     <div class="thumbnail GeneralDivNoScroll" >
                         <div class="caption" id="divTotal">
                             <b>Department</b>
@@ -124,7 +124,15 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <div class="thumbnail GeneralDiv">
 
+                        <div class="caption">
+                            <h4>General Notes</h4>
+                            <div id="GeneralNotes"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 

@@ -9,6 +9,6 @@
     password="1234abcd*" 
     removeAbandoned="true" 
     type="javax.sql.DataSource" 
-    url="jdbc:sqlserver://rlaraheitam.database.windows.net:1433;database=AssessingEmployee;user=rlarahe@rlaraheitam;password=1234abcd*;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;" />		
+    url="jdbc:sqlserver://rlaraheitam.database.windows.net:1433;database=AssessingEmployee;user=rlarahe@rlaraheitam;password=1234abcd*;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=300;" />		
     
 </Context>

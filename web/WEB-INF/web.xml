@@ -11,7 +11,7 @@
     <!--Comienza el mapeo de los servlets-->
     <session-config>
         <session-timeout>
-            30
+            300
         </session-timeout>
     </session-config>
     <welcome-file-list>

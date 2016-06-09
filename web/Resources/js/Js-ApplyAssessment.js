@@ -1,5 +1,6 @@
 $(document).ready(function () {
     var $finished = false;
+    $('#finish').hide();
     var $CompetenceQuestions;
     $(window).bind('beforeunload', function () {
         if( !$finished ){
@@ -152,11 +153,13 @@ $(document).ready(function () {
                 });
             });
         });
+        
         $.ajax({
             dataType: 'json',
             type: "POST",
             url: "Ct-FinishAssessment.jsp",
-            data: "AssessmentID=" + $AssessmentID,
+            data: "AssessmentID=" + $AssessmentID +
+                "&GeneralNote=" + $(".jqte_editor").html(),
             success: function (data) {
                 // REDIRECT TO THE GRAPHICS
                 location.href = 'EmployeeStatistics.jsp?EmployeeID=' + $('input[name=EmployeeID]').val();
@@ -181,10 +184,9 @@ $(document).ready(function () {
                     $('input[name=Actions]').removeAttr("checked");
                     $('input[name=Result]').removeAttr("checked");
                     if( $("select[name=CompetenceSelect] option").size() == 1 ){
-                        $('#nextQuestion').attr('disabled','disabled'); 
-                        alert("Assessment is over.");
-                        $finished = true;
-                        finishAssessment();
+                        $('#nextQuestion').hide();
+                        $('#finish').show();
+                        alert("Assessment is over. Please write the general notes and click finish assessment.");
                     }
                 }else{
                     Competence.ActualQuestion = $index2+1;
@@ -192,5 +194,11 @@ $(document).ready(function () {
             }
         });
     });
+    $('#finish').click(function(){
+        $finished = true;
+        finishAssessment();
+    });
+    $("#GeneralNote").jqte();
+    $('.jqte_editor').css({ height: '400px' });
 });
 

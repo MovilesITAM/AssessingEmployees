@@ -2,6 +2,9 @@
     Document   : Ct-UpdateCompetenceRank
     Created on : 01-ene-2016, 18:22:41
     Author     : Ricardo
+    This page update the rank of a competence
+    Returns error=1 if user doesn't have permissions or if the sesssion is over
+    Params: @Question(Text), @Deleted, @Value(Rate), @QuestionID
 --%>
 
 <%@page contentType="application/json" pageEncoding="UTF-8"%>

@@ -10,6 +10,9 @@
 <%@ taglib prefix="se" uri="/WEB-INF/tlds/EncodeMD5" %>
 
 <c:if test="${pageContext.request.method == 'POST' }">
+    <%--   
+        We Hash the password and compare with the one in the database
+    --%>
     <c:set var="EmailAddress" value="${param.Email}" />   
     <se:encodeMD5 var="PasswordHash" password="${param.Password}"/>
     <sql:query var="rsQuery" dataSource="SqlAdmin">
@@ -19,6 +22,9 @@
         <sql:param value="${PasswordHash}" />
     </sql:query>
     <c:set var="isValid" value="-1" /> 
+     <%--   
+        We save all the basic information of the employee or the administrator
+    --%>
     <c:forEach var="result" items="${rsQuery.rows}">
         <c:set var="ContactID" value="${result.ContactID}" scope="session" />
         <c:set var="FirstName" value="${result.FirstName}" scope="session" />
@@ -29,7 +35,9 @@
     </c:forEach>
     <c:choose>
         <c:when test="${isValid > 0}">
-            
+            <%--   
+                We save the permissions of the user
+            --%>
             <c:set var="CompanyID" value="-1" scope="session"/>
             <sql:query var="rsQuery" dataSource="SqlAdmin">
                 Select CompanyID,ManageRoles,ManageCompetences,ApplyAssessment,ManageTask from CompanyPermissions where ContactID = ?
